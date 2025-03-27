@@ -2,10 +2,9 @@
 
 Placeholder document for the end to end scenario
 
-## End to end scenario
+## End to end scenario 
 
 ### Steps
-
 - Create script to assign unique and known names to USB devices (based on serialId, vendorId, mac, etc)
 - Create minimal firmware containing OTA functionality and `/info` endpoint for onboarding
 - Build it with Action (update action to have 2 modes)
