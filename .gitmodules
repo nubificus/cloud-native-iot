@@ -1,0 +1,36 @@
+[submodule "components/flashjob_operator"]
+	path = components/flashjob_operator
+	url = git@github.com:nubificus/flashjob_operator.git
+	branch = uuid_array
+[submodule "components/akri-discovery-handler-go"]
+	path = components/akri-discovery-handler-go
+	url = git@github.com:nubificus/akri-discovery-handler-go.git
+	branch = main
+[submodule "components/inference-broker"]
+	path = components/inference-broker
+	url = git@github.com:nubificus/inference-broker.git
+	branch = feat_ui
+[submodule "components/esp32-sota"]
+	path = components/esp32-sota
+	url = git@github.com:nubificus/esp32-sota.git
+	branch = main
+[submodule "components/ota-agent"]
+	path = components/ota-agent
+	url = git@github.com:nubificus/ota-agent.git
+	branch = main
+[submodule "components/esp32-ota-update"]
+	path = components/esp32-ota-update
+	url = git@github.com:nubificus/esp32-ota-update.git
+	branch = feat_update
+[submodule "components/dice-auth"]
+	path = components/dice-auth
+	url = git@github.com:nubificus/dice-auth.git
+	branch = feat_submit_mac
+[submodule "components/fmnist-esp-ota"]
+	path = components/fmnist-esp-ota
+	url = git@github.com:nubificus/fmnist-esp-ota.git
+	branch = feat_build_cnn
+[submodule "components/esp32-build"]
+	path = components/esp32-build
+	url = git@github.com:nubificus/esp32-build.git
+	branch = feat_img_with_bins
