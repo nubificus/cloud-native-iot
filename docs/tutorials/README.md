@@ -138,8 +138,28 @@ sudo podman push harbor.nbfc.io/nubificus/iot/dice-auth-server:e2e
 
 #### Deploy DICE auth server and Redis
 
+The DICE auth server uses Redis as a storage backend. To ensure Redis has persistent storage across reboots an additional storage
+system for Kubernetes must be installed. In this case, we use Longhorn since it is suggested by the k3s maintainers.
+
+```bash
+sudo apt update
+sudo apt install open-iscsi -y # required by longhorn, make sure to install in both nodes
+kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.6.0/deploy/longhorn.yaml
+```
+
 ```bash
 cat <<EOF | sudo tee deployment.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 2Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -162,11 +182,18 @@ spec:
           image: redis:latest
           ports:
             - containerPort: 6379
+          volumeMounts:
+            - mountPath: /data
+              name: redis-storage
           resources:
             limits:
               memory: "256Mi"
               cpu: "500m"
           command: ["redis-server", "--appendonly", "yes"]
+      volumes:
+        - name: redis-storage
+          persistentVolumeClaim:
+            claimName: redis-data
 ---
 apiVersion: v1
 kind: Service
@@ -228,4 +255,48 @@ NAME                                          READY   STATUS    RESTARTS   AGE
 ...
 dice-auth-deployment-5cfd8b6dc4-qhzg8         1/1     Running   0          107s
 redis-deployment-64dd9d7478-t4rmd             1/1     Running   0          39s
+```
+
+### Deploy Onboarding Discovery Handler
+
+Next, we need to deploy a new Discovery Handler to onboard any devices.
+
+To create the new DH we need apply a new Akri Config:
+
+```yaml
+controller:
+  enabled: false
+agent:
+  enabled: false
+useLatestContainers: false
+rbac:
+  enabled: false
+webhookConfiguration:
+  enabled: false
+custom:
+  configuration:
+    enabled: true
+    name: http-range-onboard # The name of akric
+    capacity: 2
+    discoveryHandlerName: http-discovery-onboard # name of discovery handler, must be unique and matching discovery.name. will be used for socket creation
+    discoveryDetails: | # make sure this is valid YAML
+      ipStart: 192.168.11.20
+      ipEnd: 192.168.11.100
+      applicationType: initial
+      secure: true
+    brokerPod:
+      image:
+        repository: gntouts/akri-example-broker
+        tag: aba58b6
+  discovery:
+    enabled: true
+    image:
+      repository: harbor.nbfc.io/nubificus/iot/akri-discovery-handler-go
+      tag: 61d23fb
+    name: http-discovery-onboard # name of discovery handler, must be unique and matching custom.configuration.discoveryHandlerName
+```
+
+```bash
+helm template akri akri-helm-charts/akri -f onboardingConfig.yaml > template.yaml
+kubectl apply -f ./template.yaml
 ```
