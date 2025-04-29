@@ -64,7 +64,6 @@ In the worker node:
 
 ```bash
 TOKEN="mynodetoken"
-TOKEN="K10cb1aec2eaef0b96931b5523fc8bdc11f398a544cd239a8defb7a0b5d837daec4::server:6e958b911ddbdf5670f1042e761ebd1a"
 curl -sfL https://get.k3s.io | K3S_URL=https://cniot01:6443 K3S_TOKEN=$TOKEN sh -
 ```
 
@@ -268,11 +267,13 @@ controller:
   enabled: false
 agent:
   enabled: false
-useLatestContainers: false
+cleanupHook:
+  enabled: false
 rbac:
   enabled: false
 webhookConfiguration:
   enabled: false
+useLatestContainers: false
 custom:
   configuration:
     enabled: true
@@ -286,8 +287,8 @@ custom:
       secure: true
     brokerPod:
       image:
-        repository: gntouts/akri-example-broker
-        tag: aba58b6
+        repository: docker.io/gntouts/pause
+        tag: latest
   discovery:
     enabled: true
     image:
