@@ -67,6 +67,53 @@ TOKEN="mynodetoken"
 curl -sfL https://get.k3s.io | K3S_URL=https://cniot01:6443 K3S_TOKEN=$TOKEN sh -
 ```
 
+#### Install MetalLB in the cluster
+
+To ensure the IoT devices can talk to the OTA agent, we need to provide the flashjob pod with a routeable IP. We use metallb to do that.
+
+Fisrt, we need to apply the manifest:
+
+```bash
+VERSION=v0.13.12
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/$VERSION/config/manifests/metallb-native.yaml
+```
+
+Next, we will create an IP pool:
+
+```bash
+cat <<EOF | tee ip-pool.yaml
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: first-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 192.168.5.201-192.168.5.230
+EOF
+kubectl apply -f ip-pool.yaml
+```
+
+> **Note**: This must be a unique range in our subnet. For our e2e example we use 192.168.5.221-230 (max 9 concurrent flashjobs)
+
+Finally, we will enable l2 advertisment (this will populate ARP entries across the cluster):
+
+```bash
+cat <<EOF | tee l2add.yaml
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: example
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - first-pool
+EOF
+kubectl apply -f l2add.yaml
+```
+
+> **Note**: This is not needed most probably for this setup, but it's good to have it in case an arp request does not reach the cluster correctly.
+
 #### Install Akri in the cluster
 
 To install Akri we will need Helm:
