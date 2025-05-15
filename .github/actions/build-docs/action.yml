@@ -1,0 +1,50 @@
+name: Build Docs
+description: Build and optionally deploy docs
+
+inputs:
+  source-path:
+    default: '.'
+  strict:
+    default: 'false'
+  deploy-version:
+    default: ''
+  deploy-alias:
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Create python virtual env
+      working-directory: ${{ inputs.source-path }}
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3-venv
+        python3 -m venv .venv
+      shell: bash
+
+    - name: Install dependencies
+      working-directory: ${{ inputs.source-path }}
+      run: |
+        ./.venv/bin/pip install --upgrade pip
+        ./.venv/bin/pip install -r requirements.txt
+      shell: bash
+
+    - name: Build docs
+      working-directory: ${{ inputs.source-path }}
+      run: |
+        [[ "${{ inputs.strict }}" == "true" ]] && strict_flags="--strict"
+        ./.venv/bin/mkdocs build ${strict_flags+"${strict_flags}"}
+      shell: bash
+
+    - name: Deploy to Github Pages
+      working-directory: ${{ inputs.source-path }}
+      if: ${{ inputs.deploy-version != '' }}
+      run: |
+        git config --global \
+          user.name "github-actions[bot]"
+        git config --global \
+          user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        source ./.venv/bin/activate
+        mike deploy --push --update-aliases \
+          "${{ inputs.deploy-version }}" "${{ inputs.deploy-alias }}"
+      shell: bash

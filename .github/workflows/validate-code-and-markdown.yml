@@ -1,0 +1,70 @@
+name: Validate Code and Markdown
+
+on:
+  workflow_call:
+    inputs:
+      actions-repo:
+        type: string
+        default: 'nubificus/vaccel'
+      actions-rev:
+        type: string
+        default: 'main'
+    secrets:
+      GIT_CLONE_PAT:
+        required: false
+      VACCEL_BOT_PRIVATE_KEY:
+        required: true
+
+jobs:
+  linter-super-linter:
+    name: Lint GHActions/Markdown/YAML/JS
+    runs-on: [base-dind-2204-amd64]
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+
+    steps:
+      - name: Checkout .github directory
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
+          repository: ${{ inputs.actions-repo }}
+          ref: ${{ inputs.actions-rev }}
+
+      - name: Generate vaccel-bot token
+        id: generate-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.VACCEL_BOT_APP_ID }}
+          private-key: ${{ secrets.VACCEL_BOT_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          permission-contents: read
+
+      - name: Initialize workspace
+        uses: ./.github/actions/initialize-workspace
+        with:
+          submodules: 'true'
+          remote-actions-repo: ${{ inputs.actions-repo }}
+          token: >-
+            ${{ steps.generate-token.outputs.token ||
+              secrets.GIT_CLONE_PAT || github.token }}
+          fetch-depth: 0
+
+      - name: Run super-linter
+        uses: super-linter/super-linter/slim@v7
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ENABLE_GITHUB_ACTIONS_STEP_SUMMARY: false
+          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_PYTHON_RUFF: true
+          VALIDATE_BASH: true
+          VALIDATE_SHELL_SHFMT: true
+          VALIDATE_DOCKERFILE_HADOLINT: true
+          VALIDATE_GITHUB_ACTIONS: true
+          VALIDATE_MARKDOWN: true
+          MARKDOWN_CONFIG_FILE: .markdownlint.yml
+          VALIDATE_MARKDOWN_PRETTIER: true
+          VALIDATE_YAML: true
+          VALIDATE_JAVASCRIPT_ES: true

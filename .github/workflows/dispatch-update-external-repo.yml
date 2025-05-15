@@ -1,0 +1,43 @@
+name: Update External Repo
+run-name: >-
+  ${{ (github.event_name == 'workflow_dispatch') &&
+    github.event.inputs.run-name || github.event.client_payload.run-name }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      run-name:
+        type: string
+        required: true
+      trigger-id:
+        type: string
+        required: true
+      ref:
+        type: string
+        required: true
+      branch:
+        type: string
+        required: true
+      repo:
+        type: string
+        required: true
+      deploy:
+        type: boolean
+        default: false
+  repository_dispatch:
+    types: [update-external-repo]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  update-repo:
+    name: Update Repo
+    uses: ./.github/workflows/verify-build.yml
+    with:
+      external-payload: >-
+        ${{ (github.event_name == 'workflow_dispatch')
+          && toJson(github.event.inputs)
+          || toJson(github.event.client_payload) }}
+    secrets: inherit
