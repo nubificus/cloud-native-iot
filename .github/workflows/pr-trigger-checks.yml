@@ -1,0 +1,55 @@
+name: Trigger Checks
+
+on:
+  pull_request:
+    branches: ["main"]
+    types: [opened]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  ACTIONS_REPO: 'nubificus/vaccel'
+  ACTIONS_REV: 'main' 
+jobs:
+  trigger-checks:
+    name: Trigger Checks
+    runs-on: [base-2204-amd64]
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout .github directory
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
+          repository: ${{ env.ACTIONS_REPO }}
+          ref: ${{ env.ACTIONS_REV }}
+
+      - name: Generate vaccel-bot token
+        id: generate-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.VACCEL_BOT_APP_ID }}
+          private-key: ${{ secrets.VACCEL_BOT_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          permission-contents: read
+          permission-pull-requests: write
+
+      - name: Initialize workspace
+        uses: ./.github/actions/initialize-workspace
+        with:
+          submodules: 'true'
+          remote-actions-repo: ${{ env.ACTIONS_REPO }}
+          token: >-
+            ${{ steps.generate-token.outputs.token ||
+              secrets.GIT_CLONE_PAT || github.token }}
+
+      - name: Trigger checks
+        uses: ./.github/actions/readd-issue-label
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          label: 'ok-to-test'
+          token: ${{ steps.generate-token.outputs.token }}

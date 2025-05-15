@@ -1,0 +1,9 @@
+[default.extend-identifiers]
+ScatterND = "ScatterND"
+
+[files]
+extend-exclude = [
+  "docs/language-bindings/python-bindings/api-reference/**",
+  "docs/assets/**",
+  "outdated_docs/**",
+]

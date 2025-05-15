@@ -1,0 +1,163 @@
+site_name: Cloud-native IoT
+site_url: https://nubificus.github.io/cloud-native-iot
+site_author: Nubificus LTD
+
+repo_url: https://github.com/nubificus/cloud-native-iot
+repo_name: nubificus/cloud-native-iot
+
+# We use a custom `copyright` plugin, so only set the starting year
+copyright: "2023"
+
+not_in_nav: /index.md
+
+draft_docs: |
+  performance/
+
+theme:
+  name: material
+  favicon: assets/images/vaccel-logo-favicon.svg
+  logo: assets/images/cniot-logo.svg
+  custom_dir: overrides
+  palette: 
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: vaccel
+      primary: light blue
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+
+
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.indexes
+    - navigation.tracking
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - content.code.copy
+    - content.tabs.link
+    - search.highlight
+    - search.suggest
+    - search.share
+
+extra_css:
+  - assets/stylesheets/theme.css
+extra_javascript:
+  - assets/javascripts/console-copy.js
+
+extra:
+  version:
+    provider: mike
+    alias: true
+  analytics:
+    provider: google
+    property: G-X2S0PFR6ZY
+  gen_py_reference:
+    out_path: language-bindings/python-bindings/api-reference
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: '🔗'
+      toc_depth: 3
+  - pymdownx.blocks.tab:
+      alternate_style: True
+      combine_header_slug: True
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.blocks.caption
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        # exclude '$' from copying
+        - name: console
+          class: console
+          validator: ^.*
+          format: !!python/name:pymdownx.superfences.fence_code_format
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - search
+  - section-index
+  - awesome-nav
+  - macros:
+      include_yaml: [variables/versions.yml]
+      j2_block_start_string: "[%"
+      j2_block_end_string: "%]"
+      j2_variable_start_string: "[["
+      j2_variable_end_string: "]]"
+      j2_comment_start_string: '[#'
+      j2_comment_end_string: '#]'
+  - minify:
+      minify_html: true
+      minify_css: true
+      minify_js: true
+      htmlmin_opts:
+          remove_comments: true
+      cache_safe: true
+      css_files:
+          - assets/stylesheets/theme.css
+      js_files:
+          - assets/javascripts/console-copy.js
+  - autorefs
+  - mkdocstrings:
+      custom_templates: overrides/mkdocstrings
+      handlers:
+        python:
+          inventories:
+            - https://docs.python.org/3/objects.inv
+          paths: [external_repos/vaccel-python]
+          options:
+            docstring_style: "google"
+            docstring_options:
+              ignore_init_summary: true
+            merge_init_into_class: true
+            filters: ["!^_"]
+            inherited_members: true
+            parameter_headings: true
+            separate_signature: true
+            show_root_heading: true
+            show_root_full_path: false
+            show_signature_annotations: true
+            show_docstring_attributes: false
+            signature_crossrefs: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            line_length: 80
+            group_by_category: true
+            heading_level: 1
+
+hooks:
+  - hooks/copyright.py
+  - hooks/gen_py_reference.py

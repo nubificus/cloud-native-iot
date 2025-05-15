@@ -1,0 +1,73 @@
+name: "Verify Links"
+
+on:
+  workflow_call:
+    inputs:
+      actions-repo:
+        type: string
+        default: 'nubificus/vaccel'
+      actions-rev:
+        type: string
+        default: 'main'
+    secrets:
+      GIT_CLONE_PAT:
+        required: false
+      VACCEL_BOT_PRIVATE_KEY:
+        required: true
+
+jobs:
+  verify-links:
+    name: Verify Links
+    runs-on: [base-dind-2204-amd64]
+
+    steps:
+      - name: Checkout .github directory
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
+          repository: ${{ inputs.actions-repo }}
+          ref: ${{ inputs.actions-rev }}
+
+      - name: Generate vaccel-bot token
+        id: generate-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.VACCEL_BOT_APP_ID }}
+          private-key: ${{ secrets.VACCEL_BOT_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          permission-contents: read
+
+      - name: Initialize workspace
+        uses: ./.github/actions/initialize-workspace
+        with:
+          submodules: 'true'
+          remote-actions-repo: ${{ inputs.actions-repo }}
+          token: >-
+            ${{ steps.generate-token.outputs.token ||
+              secrets.GIT_CLONE_PAT || github.token }}
+
+      - name: Build docs
+        uses: ./.github/actions/build-docs
+
+      - name: Check markdown links w/o macros
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --retry-wait-time 10
+            --exclude '\[\[\s*.*?\s*\]\]'
+            --exclude-path docs/language-bindings/python-bindings/api-reference
+            docs
+
+      - name: Set excluded patterns
+        run: |
+          site_url_esc=$(sed 's/[.[\()*+?^${}|\&\/]/\\&/g' docs/CNAME)
+          echo "SITE_URL_ESC=${site_url_esc}" >> "$GITHUB_ENV"
+
+      - name: Check external links in HTML
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --retry-wait-time 20
+            --root-dir $(pwd)/site
+            --exclude ^https://${{ env.SITE_URL_ESC }}
+            site

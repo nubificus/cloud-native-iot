@@ -1,0 +1,155 @@
+name: Verify Build
+
+on:
+  workflow_call:
+    inputs:
+      actions-repo:
+        type: string
+        default: 'nubificus/vaccel'
+      actions-rev:
+        type: string
+        default: 'main'
+      strict:
+        type: boolean
+        default: false
+      deploy:
+        type: boolean
+        default: false
+      external-payload:
+        type: string
+        default: ''
+    secrets:
+      GIT_CLONE_PAT:
+        required: false
+      VACCEL_BOT_PRIVATE_KEY:
+        required: true
+
+jobs:
+  verify-build:
+    name: Verify Build
+    runs-on: [base-dind-2204-amd64]
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout .github directory
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
+          repository: ${{ inputs.actions-repo }}
+          ref: ${{ inputs.actions-rev }}
+
+      - name: Generate vaccel-bot token
+        id: generate-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.VACCEL_BOT_APP_ID }}
+          private-key: ${{ secrets.VACCEL_BOT_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Initialize workspace
+        uses: ./.github/actions/initialize-workspace
+        with:
+          submodules: 'true'
+          remote-actions-repo: ${{ inputs.actions-repo }}
+          token: >-
+            ${{ steps.generate-token.outputs.token ||
+              secrets.GIT_CLONE_PAT || github.token }}
+          fetch-depth: 0
+
+      - name: Parse external payload
+        id: parse-payload
+        if: ${{ inputs.external-payload }}
+        run: |
+          ext_trigger_id="${{ fromJson(inputs.external-payload).trigger-id }}"
+          ext_repo="${{ fromJson(inputs.external-payload).repo }}"
+          ext_run_url="https://github.com/${ext_repo}/actions/runs/${ext_trigger_id}"
+          echo "## Client request info" >> "$GITHUB_STEP_SUMMARY"
+          echo "Triggered by **${ext_repo}** run [#${ext_trigger_id}](${ext_run_url})" \
+            >> "$GITHUB_STEP_SUMMARY"
+          echo "Parsing payload from run: ${ext_run_url}"
+          echo "ext-trigger-id=${ext_trigger_id}" \
+            | tee -a "$GITHUB_OUTPUT"
+          echo "ext-ref=${{ fromJson(inputs.external-payload).ref }}" \
+            | tee -a "$GITHUB_OUTPUT"
+          echo "ext-branch=${{ fromJson(inputs.external-payload).branch }}" \
+            | tee -a "$GITHUB_OUTPUT"
+          echo "ext-repo=${ext_repo}" \
+            | tee -a "$GITHUB_OUTPUT"
+          echo "ext-deploy=${{ fromJson(inputs.external-payload).deploy }}" \
+            | tee -a "$GITHUB_OUTPUT"
+
+      - name: Fetch submodule for ${{ steps.parse-payload.outputs.ext-repo }}
+        id: fetch-submodule
+        if: ${{ inputs.external-payload }}
+        run: |
+          ext_repo="${{ steps.parse-payload.outputs.ext-repo }}"
+          git submodule foreach "
+            url=\$(git config --file \$toplevel/.gitmodules submodule.\$name.url)
+            echo \"\${url}\"
+            if [ \"\${url#*\"$ext_repo\"}\" != \"${url}\" ]; then
+              echo \"Updating submodule \$name at \$path\"
+              git checkout \"${{ steps.parse-payload.outputs.ext-ref }}\"
+              echo \"sm-name=\$name\" >> \"$GITHUB_OUTPUT\"
+              echo \"sm-path=\$path\" >> \"$GITHUB_OUTPUT\"
+              break
+            fi
+          "
+
+      - name: Build docs
+        uses: ./.github/actions/build-docs
+        with:
+          strict: ${{ inputs.strict }}
+          deploy-version: >-
+            ${{ inputs.deploy == true
+              && (contains(github.ref, 'refs/tags/')
+                && github.ref_name || 'main')
+              || '' }}
+          deploy-alias: >-
+            ${{ inputs.deploy == true
+              && (contains(github.ref, 'refs/tags/')
+                && 'latest' || 'dev')
+              || '' }}
+
+      - name: Create pull request
+        id: create-pr
+        if: ${{ steps.parse-payload.outputs.ext-deploy == 'true' }}
+        uses: peter-evans/create-pull-request@v7
+        env:
+          SUBMODULE: ${{ steps.fetch-submodule.outputs.sm-name }}
+          EXT_REF: ${{ steps.parse-payload.outputs.ext-ref }}
+          EXT_BRANCH: ${{ steps.parse-payload.outputs.ext-branch }}
+          EXT_REPO: ${{ steps.parse-payload.outputs.ext-repo }}
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          commit-message: |
+            chore(${{ env.SUBMODULE }}): Update submodule revision
+
+            Update submodule `${{ env.SUBMODULE }}` to revision
+            ${{ env.EXT_REPO }}@${{ env.EXT_REF }}
+          sign-commits: true
+          signoff: true
+          branch: update_${{ env.SUBMODULE }}_${{ env.EXT_BRANCH }}
+          delete-branch: true
+          title: "chore(${{ env.SUBMODULE }}): Update submodule revision"
+          body: >-
+            Update submodule `${{ env.SUBMODULE }}` to revision
+            ${{ env.EXT_REPO }}@${{ env.EXT_REF }}
+          add-paths: ${{ env.SUBMODULE }}
+
+      - name: Print Pull Request info
+        if: ${{ steps.parse-payload.outputs.ext-deploy == 'true' }}
+        run: |
+          pr_number="${{ steps.create-pr.outputs.pull-request-number }}"
+          pr_url="${{ steps.create-pr.outputs.pull-request-url }}"
+          pr_operation="${{ steps.create-pr.outputs.pull-request-operation }}"
+          echo "## Pull request info" >> "$GITHUB_STEP_SUMMARY"
+          echo "${pr_operation^} PR [${{ github.repository }}#${pr_number}](${pr_url})" \
+            >> "$GITHUB_STEP_SUMMARY"
+          echo "Pull request number: ${pr_number}"
+          echo "Pull request URL: ${pr_url}"
+          echo "Pull request operation: ${pr_operation}"
+          echo "Pull request head SHA: ${{ steps.create-pr.outputs.pull-request-head-sha }}"
+          echo "Pull request branch: ${{ steps.create-pr.outputs.pull-request-branch }}"
