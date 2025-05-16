@@ -1,0 +1,25 @@
+# Architecture Overview
+
+Our Cloud-Native IoT Platform is designed to securely manage heterogeneous IoT devices and applications across edge and cloud environments. It combines trusted onboarding, modular OTA updates, dynamic discovery, and resource offloading within a Kubernetes-native control plane.
+
+## Layers of the Architecture
+
+1. **Device Layer**  
+   ESP32 and Linux-class devices capable of secure boot and attestation (via DICE).
+
+2. **Edge Layer**  
+   Lightweight Kubernetes clusters or single-node runtimes (e.g., K3s, MicroK8s) managing Akri, OTA agents, and offloading clients.
+
+3. **Cloud/Orchestrator Layer**  
+   Manages policies, metadata, and orchestrates device lifecycle, offloading targets, and OTA operations.
+
+## Key Technologies
+
+- **Akri** for device discovery and Kubernetes resource mapping.
+- **DICE** (Device Identifier Composition Engine) for secure onboarding.
+- **vAccel** for portable compute offloading.
+- **mTLS** with mbedTLS for all device-to-cloud communications.
+- **Custom Operators/CRDs** for OTA and offloading management.
+
+For a component-level breakdown, see [Architecture → Components](components/onboarding/overview.md).
+
