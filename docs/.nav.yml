@@ -1,34 +1,25 @@
 nav:
   - Home: index.md
   - Architecture:
-    - architecture/overview.md
-    - architecture/components.md
-    - architecture/dataflow.md
+    - architecture/index.md
+    - architecture/dice.md
+    - architecture/ota_process.md
   - Getting started:
     - getting-started/prerequisites.md
     - getting-started/quickstart.md
     - getting-started/deployment-guide.md
-  - Components:
-    - components/overview.md
-    - Onboarding:
-      - components/onboarding/overview.md
-      - components/onboarding/dice-auth-service.md
-      - components/onboarding/akri-integration.md
-    - OTA Updates:
-      - components/ota-updates/overview.md
-      - components/ota-updates/ota-service.md
-      - components/ota-updates/ota-agent.md
-      - components/ota-updates/firmware-signing.md
-    - Resource Offloading:
-      - components/resource-offloading/overview.md
-      - components/resource-offloading/vaccel.md
-      - components/resource-offloading/neighbor-offloading.md
-    - Discovery:
-      - components/discovery/overview.md
-      - components/discovery/akri-discovery-handler.md
-    - Flashjob Operator:
-      - components/flashjob-operator/overview.md
-      - components/flashjob-operator/flashjob-operator.md
+  - Components: 
+    - components/index.md
+    - components/attestation-server.md
+    - components/dice-auth-service.md
+    - components/akri-integration.md
+    - components/ota-service.md
+    - components/ota-agent.md
+    - components/firmware-signing.md
+    - components/vaccel.md
+    - components/neighbor-offloading.md
+    - components/akri-discovery-handler.md
+    - components/flashjob-operator.md
   - Developers:
     - developer/architecture.md
     - developer/testing.md
