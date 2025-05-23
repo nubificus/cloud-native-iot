@@ -109,7 +109,7 @@ markdown_extensions:
 
 plugins:
   - search
-  - section-index
+  #- section-index
   - awesome-nav
   - macros:
       include_yaml: [variables/versions.yml]
