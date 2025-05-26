@@ -6,47 +6,29 @@ the Cloud-native IoT project.
 ## Secure Onboarding & Device Registration
 
 - [DICE-based Attestation server](attestation-server.md): Simple entity deployed in a secure enclave that validates DICE certificates generated from leaf devices.
-- [Onboarding and OTA update Agent](esp32-akri.md): Component that integrates with the user application and provides endpoints to propagate general and attestation information to the rest of the system.
-- [Enhanced Akri Discovery Handler[(akri-dh.md): Facilitates dynamic discovery and inventory of IoT devices within Kubernetes clusters, based on Akri.
+- [Onboarding and OTA update Service](esp32-akri.md): Component that integrates with the user application and provides endpoints to propagate general and attestation information to the rest of the system.
+- [Enhanced Akri Discovery Handler](akri-dh.md): Facilitates dynamic discovery and inventory of IoT devices within Kubernetes clusters, based on Akri.
 
   <!-- [:octicons-arrow-right-24: Read More](onboarding/overview.md) -->
 
 ## OTA (Over-The-Air) Update Framework
 
-- OTA Agent: Manages firmware fetch and provides the update endpoint for devices.
-- OTA Service: Runs on devices to securely receive, verify, and apply firmware updates.
-- TLS Security: Ensures encrypted communication and integrity of update payloads.
+- [OTA Agent](ota-agent.md): Manages firmware fetch and provides the update endpoint for devices.
+- [OTA Service](ota-service.md): Runs on devices to securely receive, verify, and apply firmware updates.
+- [TLS Security](mbedtls.md): Ensures encrypted communication and integrity of update payloads.
 
-  [:octicons-arrow-right-24: Read More](ota-updates/overview.md)
-
----
-
-## Application & Device Management APIs
-
-- Expose REST endpoints to query device and application info.
-- Provide APIs for triggering OTA updates and retrieving attestation certificates.
-- Enable remote management actions via secure and authenticated HTTP interfaces.
-
----
-
-## Compute Offloading with vAccel
-
-- vAccel: Allows lightweight, scalable offloading of compute-intensive tasks from edge devices to nearby accelerators or cloud resources.
-- Custom Transport: Supports TCP sockets for communication.
-- Integrates seamlessly with Kubernetes-native mechanisms.
-
-  [:octicons-arrow-right-24: Read More](resource-offloading/overview.md)
-
----
+  <!-- [:octicons-arrow-right-24: Read More](ota-updates/overview.md) -->
 
 ## Cloud-Native Infrastructure
 
-- Kubernetes & Operators: All components are deployed and managed using Kubernetes primitives, custom resource definitions (CRDs), and operators.
-- Secure Identity & Communication: Mutual TLS, certificate management, and token-based authentication ensure system-wide security.
+- [Kubernetes & Operators](flasjob.md): All components are deployed and managed using Kubernetes primitives, custom resource definitions (CRDs), and operators.
+- [Application building & packaging](cloud-native-build.md): All components are built and packaged using standard cloud-native tooling.
+
 <!---- Observability: Metrics, logs, and tracing are integrated to monitor device health, OTA progress, and offload performance. -->
 
 
-  [:octicons-arrow-right-24: Read More](../flashjob-operator/overview.md)
+  <!-- [:octicons-arrow-right-24: Read More](../flashjob-operator/overview.md) -->
+<!-- 
 # Onboarding Overview
 
 Secure device onboarding is a cornerstone of our platform, enabling zero-touch, verifiable registration of edge devices. The onboarding workflow is anchored on the **DICE (Device Identifier Composition Engine)** standard and integrated with Akri to register and expose trusted devices within Kubernetes.
@@ -108,3 +90,4 @@ Edge devices often have limited compute resources. To support demanding workload
 - Seamless fallback to cloud if no neighbor is available
 
 Offloading decisions are policy-driven and workload-aware.
+-->
