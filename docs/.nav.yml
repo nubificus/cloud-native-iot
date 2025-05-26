@@ -11,15 +11,12 @@ nav:
   - Components: 
     - components/index.md
     - components/attestation-server.md
+    - components/ota-service.md
+    - components/akri-dh.md
     - components/dice-auth-service.md
     - components/akri-integration.md
-    - components/ota-service.md
-    - components/ota-agent.md
+    - components/flashjob.md
     - components/firmware-signing.md
-    - components/vaccel.md
-    - components/neighbor-offloading.md
-    - components/akri-discovery-handler.md
-    - components/flashjob-operator.md
   - Developers:
     - developer/architecture.md
     - developer/testing.md
