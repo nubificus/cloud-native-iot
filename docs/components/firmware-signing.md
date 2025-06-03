@@ -1,4 +1,4 @@
-# Firmware Security
+# Firmware Signing
 
 Firmware authenticity and integrity are essential to prevent malicious updates and bricking attacks.
 

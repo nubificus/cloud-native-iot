@@ -11,7 +11,7 @@ copyright: "2023"
 not_in_nav: /index.md
 
 draft_docs: |
-  performance/
+  other/
 
 theme:
   name: material

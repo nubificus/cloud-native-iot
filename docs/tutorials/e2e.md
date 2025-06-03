@@ -13,12 +13,12 @@ Placeholder document for the end to end scenario
 - [Deploy our custom operator](#deploy-flashjob-operator)
 - [Deploy our DICE auth server](#deploy-dice-auth-server)
 - Deploy an onboarding Discovery Handler
-- Post their MAC addresses to DICE auth  (automate proccess)
+- Post their MAC addresses to DICE auth  (automate process)
 - Wait for onboarding Discovery Handler to discover them
 - Deploy 2 additional Discovery Handlers (based on 2 different application types)
 - Use operator to flash X devices with application A and Y devices with application B (leveraging panos' script)
 - Use operator to repurpose 1 or more Devices for application A to B
-- Use operator to upgrade 1 or more Devices to newest fimrware version
+- Use operator to upgrade 1 or more Devices to newest firmware version
 
 ### Future tasks
 
@@ -70,7 +70,7 @@ curl -sfL https://get.k3s.io | K3S_URL=https://cniot01:6443 K3S_TOKEN=$TOKEN sh 
 
 To ensure the IoT devices can talk to the OTA agent, we need to provide the flashjob pod with a routeable IP. We use metallb to do that.
 
-Fisrt, we need to apply the manifest:
+First, we need to apply the manifest:
 
 ```bash
 VERSION=v0.13.12
@@ -95,7 +95,7 @@ kubectl apply -f ip-pool.yaml
 
 > **Note**: This must be a unique range in our subnet. For our e2e example we use 192.168.5.221-230 (max 9 concurrent flashjobs)
 
-Finally, we will enable l2 advertisment (this will populate ARP entries across the cluster):
+Finally, we will enable l2 advertisement (this will populate ARP entries across the cluster):
 
 ```bash
 cat <<EOF | tee l2add.yaml
