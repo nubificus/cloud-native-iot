@@ -136,7 +136,7 @@ espsecure.py sign_data --version 2 --keyfile PRIVATE_SIGNING_KEY --output build/
 ```
 to sign your partition table.
 
-Now, based on the offsets configured on the partition table (say, `0x10000` for the partion table and `0x20000` for the factory app), you can use `esptool.py` to flash the signed binaries:
+Now, based on the offsets configured on the partition table (say, `0x10000` for the partition table and `0x20000` for the factory app), you can use `esptool.py` to flash the signed binaries:
 ```
 esptool.py --before default_reset --after no_reset write_flash --flash_mode dio --flash_size keep --flash_freq 80m 0x10000 build/partition_table/partition-table-signed.bin 0x20000 build/app-signed.bin
 ```

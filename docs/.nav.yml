@@ -5,17 +5,14 @@ nav:
     - getting-started/prerequisites.md
     - getting-started/quickstart.md
     - getting-started/installation.md
-    - getting-started/deployment-guide.md
   - Architecture:
     - architecture/index.md
-    - architecture/dice.md
-    - architecture/ota_process.md
   - Components: 
     - components/index.md
     - components/attestation-server.md
     - components/ota-service.md
+    - components/ota-agent.md
     - components/akri-dh.md
-    - components/dice-auth-service.md
     - components/akri-integration.md
     - components/flashjob.md
     - components/firmware-signing.md
