@@ -64,7 +64,7 @@ jobs:
           VALIDATE_DOCKERFILE_HADOLINT: true
           VALIDATE_GITHUB_ACTIONS: true
           VALIDATE_MARKDOWN: true
-          MARKDOWN_CONFIG_FILE: .markdownlint.yml
+          MARKDOWN_CONFIG_FILE: .github/linters/.markdownlint.yml
           VALIDATE_MARKDOWN_PRETTIER: true
           VALIDATE_YAML: true
           VALIDATE_JAVASCRIPT_ES: true

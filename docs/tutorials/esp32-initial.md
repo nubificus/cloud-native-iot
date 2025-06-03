@@ -124,7 +124,7 @@ void send_file(const char *filename) {
 
     /* Read from the file and send it to the server in chunks */
     while ((bytes_read = fread(buffer, 1, CHUNK_SIZE, file)) > 0) {
-	if (send(sock, buffer, bytes_read, 0) < 0) {
+    if (send(sock, buffer, bytes_read, 0) < 0) {
             perror("Error: Failed to send data");
             break;
         }
@@ -155,7 +155,7 @@ gcc -o client tcp_client.c
 ./client /path/to/file.bin
 ```
 ### Secure implementation
-If you build with `OTA_SECURE`, you will need to check the more advanced OTA Agent implementation, which works with DICE certificates and TLS connection. For more information, view the [repository](https://github.com/nubificus/ota-agent) or the [documentation](https://github.com/nubificus/akri-ecosystem-hub/blob/main/doc/ota-agent.md).
+If you build with `OTA_SECURE`, you will need to check the more advanced OTA Agent implementation, which works with DICE certificates and TLS connection. For more information, view the [repository](https://github.com/nubificus/ota-agent) or the [documentation](../components/ota-agent.md).
 
 ## Simple Firmware to use for Update
 

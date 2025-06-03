@@ -1,7 +1,7 @@
 # ota-service
 ESP32 Component for performing Over the Air updates. The component contains only the handlers. To setup the functions as akri-endpoints handlers, use the `esp32-akri` component.
 
- ## How to use
+## How to use
 ```
 cd <path-to-your-esp-idf-project>
 mkdir -p components

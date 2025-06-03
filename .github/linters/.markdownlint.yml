@@ -1,1 +1,38 @@
-../../.markdownlint.yml
+default: true
+extends: null
+
+# See rules:
+# https://github.com/markdownlint/markdownlint/blob/main/docs/RULES.md
+
+# ul-indent
+MD007:
+  indent: 4
+
+# no-multiple-blanks
+MD012: false
+
+# line-length
+MD013:
+  ignore_code_blocks: true
+  code_blocks: false
+
+# no-duplicate-header
+MD024: false
+
+# no-trailing-punctuation
+MD026:
+  punctuation: ".,;:!。，；:"
+
+# no-inline-html
+MD033: false
+
+# no-emphasis-as-header
+MD036: false
+
+MD013: false
+MD032: false
+MD022: false
+MD031: false
+MD040: false
+MD007: false
+MD009: false

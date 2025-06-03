@@ -16,16 +16,9 @@ draft_docs: |
 
 theme:
   name: material
-  favicon: assets/images/vaccel-logo-favicon.svg
+  favicon: assets/images/cniot-logo.svg
   logo: assets/images/cniot-logo.svg
   custom_dir: overrides
-  palette: 
-    # Palette toggle for automatic mode
-    - media: "(prefers-color-scheme)"
-      toggle:
-        icon: material/brightness-auto
-        name: Switch to light mode
-
   palette:
     - media: "(prefers-color-scheme: dark)"
       scheme: slate

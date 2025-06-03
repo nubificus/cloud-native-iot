@@ -33,7 +33,7 @@ This site serves as the central hub for all documentation related to the platfor
 
     ---
 
-    [:octicons-arrow-right-24: Start here](getting-started/overview.md)
+    [:octicons-arrow-right-24: Start here](getting-started/index.md)
 
 -   :material-cog-outline:{ .lg .middle } **Components**
 
@@ -49,7 +49,7 @@ This site serves as the central hub for all documentation related to the platfor
 
     Discover how you can contribute!
 
-    [:octicons-arrow-right-24: Developer](developer/overview.md)
+    [:octicons-arrow-right-24: Developer](developer/index.md)
 
 </div>
 
