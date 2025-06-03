@@ -41,7 +41,7 @@ This site serves as the central hub for all documentation related to the platfor
 
     Browse through the system basic components
 
-    [:octicons-arrow-right-24: View Components](components/overview.md)
+    [:octicons-arrow-right-24: View Components](components/index.md)
 
 -   :material-puzzle-outline:{ .lg .middle } **Developers**
 
