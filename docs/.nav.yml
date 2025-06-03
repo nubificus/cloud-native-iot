@@ -1,13 +1,15 @@
 nav:
   - Home: index.md
+  - Getting started: 
+    - getting-started/index.md
+    - getting-started/prerequisites.md
+    - getting-started/quickstart.md
+    - getting-started/installation.md
+    - getting-started/deployment-guide.md
   - Architecture:
     - architecture/index.md
     - architecture/dice.md
     - architecture/ota_process.md
-  - Getting started:
-    - getting-started/prerequisites.md
-    - getting-started/quickstart.md
-    - getting-started/deployment-guide.md
   - Components: 
     - components/index.md
     - components/attestation-server.md
@@ -19,10 +21,12 @@ nav:
     - components/firmware-signing.md
   - Developers:
     - developer/architecture.md
-    - developer/testing.md
-    - developer/debugging.md
-    - developer/contributing.md
-  - API:
+    - developer/applications.md
+    - developer/building.md
+      #- developer/testing.md
+      #- developer/debugging.md
+      #- developer/contributing.md
+  - API: 
+    - api/index.md
     - api/openapi-spec.md
-  - FAQ:
-    - faq.md
+  - FAQ: faq.md
