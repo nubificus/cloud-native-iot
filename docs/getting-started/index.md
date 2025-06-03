@@ -13,8 +13,8 @@ For developers and system integrators, the platform offers:
 To begin your journey:
 
 - Review the [Architecture](../architecture) Overview: Understand the core components and their interactions within the platform.
-- Explore the [Quickstart](quickstart) Guide: Follow step-by-step instructions to set up your first device and connect it to the platform.
-- Dig into the [Installation](installation) Guide: Follow step-by-step instructions to set up your first device and connect it to the platform.
+- Explore the [Quickstart](quickstart.md) Guide: Follow step-by-step instructions to set up your first device and connect it to the platform.
+- Dig into the [Installation](installation.md) Guide: Follow step-by-step instructions to set up your first device and connect it to the platform.
 - Dive into [Component](../components) Details: Gain insights into individual modules like the OTA Service, Akri Integration, and more.
 - Consult the [API](../api) Documentation: Integrate your applications seamlessly using our comprehensive APIs.
 

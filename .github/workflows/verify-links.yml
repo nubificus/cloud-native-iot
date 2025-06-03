@@ -61,7 +61,9 @@ jobs:
       - name: Set excluded patterns
         run: |
           site_url_esc=$(sed 's/[.[\()*+?^${}|\&\/]/\\&/g' docs/CNAME)
-          echo "SITE_URL_ESC=${site_url_esc}" >> "$GITHUB_ENV"
+          repo_name="${GITHUB_REPOSITORY##*/}"
+          exclude_pattern="https://${site_url_esc}|${repo_name}"
+          echo "EXCLUDE_PATTERN=${exclude_pattern}" >> "$GITHUB_ENV"
 
       - name: Check external links in HTML
         uses: lycheeverse/lychee-action@v2
@@ -69,5 +71,5 @@ jobs:
           args: >-
             --retry-wait-time 20
             --root-dir $(pwd)/site
-            --exclude ^https://${{ env.SITE_URL_ESC }}
+            --exclude '^${{ env.EXCLUDE_PATTERN }}'
             site
