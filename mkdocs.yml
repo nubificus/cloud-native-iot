@@ -35,7 +35,6 @@ theme:
         icon: material/brightness-4
         name: Switch to dark mode
 
-
   features:
     - navigation.instant
     - navigation.instant.progress
@@ -71,7 +70,7 @@ markdown_extensions:
   - footnotes
   - md_in_html
   - toc:
-      permalink: '🔗'
+      permalink: "🔗"
       toc_depth: 3
   - pymdownx.blocks.tab:
       alternate_style: True
@@ -111,19 +110,19 @@ plugins:
       j2_block_end_string: "%]"
       j2_variable_start_string: "[["
       j2_variable_end_string: "]]"
-      j2_comment_start_string: '[#'
-      j2_comment_end_string: '#]'
+      j2_comment_start_string: "[#"
+      j2_comment_end_string: "#]"
   - minify:
       minify_html: true
       minify_css: true
       minify_js: true
       htmlmin_opts:
-          remove_comments: true
+        remove_comments: true
       cache_safe: true
       css_files:
-          - assets/stylesheets/theme.css
+        - assets/stylesheets/theme.css
       js_files:
-          - assets/javascripts/console-copy.js
+        - assets/javascripts/console-copy.js
   - autorefs
   - mkdocstrings:
       custom_templates: overrides/mkdocstrings

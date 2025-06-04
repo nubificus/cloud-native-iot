@@ -5,19 +5,18 @@ database. The database is used to hold all the available device root
 certificates with their key (ie the MAC address). Therefore, the database could
 be simply described by the following table:
 
-|    Key   | Certificate  |
-|----------|--------------|
-|   MAC-1  |  Root Cert 1 |
-|   MAC-2  |  Root Cert 2 |
-|   .....  |     ......   |
-|   MAC-N  |  Root Cert N |
+| Key   | Certificate |
+| ----- | ----------- |
+| MAC-1 | Root Cert 1 |
+| MAC-2 | Root Cert 2 |
+| ..... | ......      |
+| MAC-N | Root Cert N |
 
 Thus, whenever the attestation server receives an incoming POST request with an
 attestation certificate on its body, it traverses its database to check whether
 there is any certificate that verifies the given one. In case of verification,
 it responds with a `200 OK` HTTP code. Otherwise, the client will receive some
 error HTTP code. Attestation Server
-
 
 ## Dice
 
@@ -37,6 +36,7 @@ certificates: the root and the attestation certificate.
   safe.
 
 ### Root Certificate - Public
+
 The root certificate of each device is coming from its vendor. This means that
 every time we get a new device, we also get its root certificate, which is
 unique for each board, and remains the same even if we change its firmware or
@@ -47,6 +47,7 @@ a Key Derivation Function (KDF), using the MAC address and a 64 bytes salt
 (common to host and device).
 
 ### Device - Attestation Certificate
+
 It is presumably generated in the device at early boot time (assumption 2).
 Except for the Unique Device Secret, the generator also uses the bootloader
 hash and the application hash. The verification process involves the transfer
@@ -62,6 +63,7 @@ openssl verify -verbose -ignore_critical -CAfile root.pem attestation.pem
 ```
 
 ### Dice source
+
 The source code used to generate both root and attestation Dice certificates
 can be found in our github repo `nubificus/nbfc-dice`. In
 `nbfc-dice/src/main.c` there's a host-side program that builds both the root
@@ -77,5 +79,3 @@ openssl x509 -inform der -in cert.der -out cert.pem
 On the other side, a piece of code that generates the attestation certificate
 on the device side can be found in
 `nbfc-dice/dice_esp32_app/main/dice_app_example_main.c`.
-
-

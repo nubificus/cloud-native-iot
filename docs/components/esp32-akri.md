@@ -1,4 +1,5 @@
 # esp32-akri
+
 ESP32 Component for managing the akri-related http endpoints of the device. The component does not contain the handlers, only the functions to setup handlers for the akri-specific endpoints. The corresponding handler functions are contained into the `ota-service` component.
 
 ## How to use
@@ -25,11 +26,13 @@ idf_component_register(SRCS "test.c"
 ```
 
 Afterwards, you can include the component's header file:
+
 ```c
 #include "esp32-akri.h"
 ```
 
 ## API Reference
+
 ```c
 int akri_server_start();
 
@@ -47,6 +50,7 @@ int akri_set_handler_generic(const char *uri,
                              httpd_method_t method,
                              esp_err_t (*handler)(httpd_req_t *req));
 ```
+
 Make sure you have connected the device on the internet previously.
 
 ## Endpoints
@@ -58,10 +62,12 @@ The exported endpoints from esp32-akri are:
 - `/update`
 
 ### `/info`
+
 By sending a GET request to `/info`, one can retrieve information about the
 device (device type, firmware version, firmware type etc) in JSON format.
 
 ### `/update`
+
 On the other side, the update should be initialized through a POST request.
 More specifically, the body of the request should include the IP address of the
 OTA agent in the form: "ip: A.B.C.D". The handler then will extract the IP from
@@ -70,6 +76,7 @@ Agent. If the authentication succeeds, the device will receive the new
 firmware.
 
 ### `/onboard` (FIXME)
+
 Currently, the `/onboard` endpoint waits for GET requests, and responds with
 the Attestation Certificate in PEM format. The purpose of this endpoint is to
 enable the onboarding process of the device. **Important!!** However, the

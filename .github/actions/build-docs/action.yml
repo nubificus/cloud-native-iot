@@ -3,13 +3,13 @@ description: Build and optionally deploy docs
 
 inputs:
   source-path:
-    default: '.'
+    default: "."
   strict:
-    default: 'false'
+    default: "false"
   deploy-version:
-    default: ''
+    default: ""
   deploy-alias:
-    default: ''
+    default: ""
 
 runs:
   using: composite

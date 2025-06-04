@@ -1,34 +1,44 @@
 # ESP32: Over the air update (OTA)
 
-esp32-ota-update is a vanilla-type firmware for esp32 devices. It doesn't include any actual real world application, however, it can be used to load the necessary tools to perform an OTA update later. 
+esp32-ota-update is a vanilla-type firmware for esp32 devices. It doesn't include any actual real world application, however, it can be used to load the necessary tools to perform an OTA update later.
+
 ## Build
 
 The following commands will build the project.
 
 **Download esp-idf source**
+
 ```bash
 cd ~
 git clone --recursive https://github.com/espressif/esp-idf.git
 ```
+
 **Install and set the environment variables**
+
 ```bash
 cd esp-idf
 ./install.sh
 . ./export.sh
 # You have to run the last command every time the environment variables are lost.
 ```
+
 **Download the project**
+
 ```bash
 mkdir projects && cd projects
 git clone https://github.com/nubificus/esp32-ota-update.git --recursive
 cd esp32-ota-update
 ```
+
 **Security Configuration**
 If you want to use the secure implementation, set the `OTA_SECURE` environment variable before building. Otherwise, the default configuration is the non-secure.
+
 ```bash
 export OTA_SECURE=1
 ```
+
 **Build and Flash**
+
 ```bash
 export FIRMWARE_VERSION="0.1.0"
 export DEVICE_TYPE="esp32s2"
@@ -55,23 +65,31 @@ rm -f Dockerfile
 ```
 
 **You may have to define the port explicitly**
+
 ```bash
 idf.py -p <PORT> flash monitor
 # example: -p /dev/ttyUSB0
 ```
 
 **Additionally, you may have to change user's rights**
+
 ```bash
 sudo adduser <USER> dialout
 sudo chmod a+rw <PORT>
 ```
+
 **To exit ESP32 monitor**
+
 ```
 Ctr + ]
 ```
+
 ## Firmware Provider App
+
 ### Non-secure implementation
+
 In the case of the non-secure implementation, the microcontroller operates as a server, after receiving the post request. Therefore, we need a tcp client to operate as the firmware provider for the microcontroller. The following C program can do this job.
+
 ```C
 /* tcp_client.c */
 
@@ -148,13 +166,16 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 ```
+
 Don't forget to change **SERVER_IP**. Then, you can build and run the program using the following commands:
 
 ```bash
 gcc -o client tcp_client.c
 ./client /path/to/file.bin
 ```
+
 ### Secure implementation
+
 If you build with `OTA_SECURE`, you will need to check the more advanced OTA Agent implementation, which works with DICE certificates and TLS connection. For more information, view the [repository](https://github.com/nubificus/ota-agent) or the [documentation](../components/ota-agent.md).
 
 ## Simple Firmware to use for Update
@@ -165,6 +186,7 @@ Now we also need to create a simple firmware image, which will be sent by the se
 cd ~/esp-idf/examples/get-started/hello_world/
 idf.py build
 ```
+
 The new firmware image is located in `~/esp-idf/examples/get-started/hello_world/build/hello_world.bin`.
 You can use that file for the ota update by providing the path when running the client.
 

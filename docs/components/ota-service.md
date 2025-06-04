@@ -30,6 +30,7 @@ Add the component to your project by simply adding the following line inside `id
 ```cmake
 REQUIRES ota-service
 ```
+
 E.g:
 
 ```cmake
@@ -39,19 +40,23 @@ idf_component_register(SRCS "test.c"
 ```
 
 You may also have to add the following configuration to resolve some `mbedtls` issues:
+
 ```bash
 idf.py menuconfig
 ```
+
 and enable `Component config -> mbedTLS -> HKDF Algorithm (RFC 6859)`
 
 Afterwards, you can include the component's header file:
+
 ```c
 #include "ota-service.h"
 ```
 
 ## API Reference
+
 ```c
-/* 
+/*
  * this function can be passed as an
  * argument in `akri_set_update_handler()`
  * so that it (only) runs when we receive a

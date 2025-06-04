@@ -2,9 +2,10 @@
 
 Placeholder document for the end to end scenario
 
-## End to end scenario 
+## End to end scenario
 
 ### Steps
+
 - Create script to assign unique and known names to USB devices (based on serialId, vendorId, mac, etc)
 - Create minimal firmware containing OTA functionality and `/info` endpoint for onboarding
 - Build it with Action (update action to have 2 modes)
@@ -13,7 +14,7 @@ Placeholder document for the end to end scenario
 - [Deploy our custom operator](#deploy-flashjob-operator)
 - [Deploy our DICE auth server](#deploy-dice-auth-server)
 - Deploy an onboarding Discovery Handler
-- Post their MAC addresses to DICE auth  (automate process)
+- Post their MAC addresses to DICE auth (automate process)
 - Wait for onboarding Discovery Handler to discover them
 - Deploy 2 additional Discovery Handlers (based on 2 different application types)
 - Use operator to flash X devices with application A and Y devices with application B (leveraging panos' script)

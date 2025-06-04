@@ -5,10 +5,10 @@ on:
     inputs:
       actions-repo:
         type: string
-        default: 'nubificus/vaccel'
+        default: "nubificus/vaccel"
       actions-rev:
         type: string
-        default: 'main'
+        default: "main"
     secrets:
       GIT_CLONE_PAT:
         required: false
@@ -44,7 +44,7 @@ jobs:
       - name: Initialize workspace
         uses: ./.github/actions/initialize-workspace
         with:
-          submodules: 'true'
+          submodules: "true"
           remote-actions-repo: ${{ inputs.actions-repo }}
           token: >-
             ${{ steps.generate-token.outputs.token ||
@@ -64,7 +64,6 @@ jobs:
           VALIDATE_DOCKERFILE_HADOLINT: true
           VALIDATE_GITHUB_ACTIONS: true
           VALIDATE_MARKDOWN: true
-          MARKDOWN_CONFIG_FILE: .github/linters/.markdownlint.yml
           VALIDATE_MARKDOWN_PRETTIER: true
           VALIDATE_YAML: true
           VALIDATE_JAVASCRIPT_ES: true

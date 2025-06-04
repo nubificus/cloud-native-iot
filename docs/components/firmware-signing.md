@@ -28,5 +28,3 @@ openssl dgst -sha256 -sign fw-private.pem -out firmware.sig firmware.bin
   "public_key_hint": "esp32_ca"
 }
 ```
-
-

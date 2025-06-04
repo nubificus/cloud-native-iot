@@ -10,8 +10,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  ACTIONS_REPO: 'nubificus/vaccel'
-  ACTIONS_REV: 'main' 
+  ACTIONS_REPO: "nubificus/vaccel"
+  ACTIONS_REV: "main"
 jobs:
   trigger-checks:
     name: Trigger Checks
@@ -41,7 +41,7 @@ jobs:
       - name: Initialize workspace
         uses: ./.github/actions/initialize-workspace
         with:
-          submodules: 'true'
+          submodules: "true"
           remote-actions-repo: ${{ env.ACTIONS_REPO }}
           token: >-
             ${{ steps.generate-token.outputs.token ||
@@ -51,5 +51,5 @@ jobs:
         uses: ./.github/actions/readd-issue-label
         with:
           issue-number: ${{ github.event.pull_request.number }}
-          label: 'ok-to-test'
+          label: "ok-to-test"
           token: ${{ steps.generate-token.outputs.token }}
