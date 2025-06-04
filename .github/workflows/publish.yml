@@ -9,10 +9,9 @@ on:
       - main
 
   workflow_dispatch:
-  
 
 permissions:
-  contents: write  # Needed for GitHub Pages deployment
+  contents: write # Needed for GitHub Pages deployment
 
 jobs:
   deploy:
@@ -30,4 +29,3 @@ jobs:
       - name: Build and deploy MkDocs site
         run: |
           mkdocs gh-deploy --force
-

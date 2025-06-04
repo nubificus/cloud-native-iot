@@ -11,5 +11,3 @@ What you'll find here:
 - [High-level Architecture](architecture.md) as a basis to extend the platform: Guidelines for adding new device types, API endpoints, or custom discovery mechanisms.
 
 This section is the go-to resource for anyone looking to contribute to the platform or build custom integrations atop its core functionality.
-
-

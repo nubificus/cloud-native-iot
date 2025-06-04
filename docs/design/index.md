@@ -22,18 +22,18 @@ management.
 ##### **Layers Overview**
 
 1. **Device Layer**
-    - IoT devices like ESP32, ESP32-S2 and ESP32-S3, preloaded with UDS (Unique Device Secrets).
-    - Entity Attestation Tokens (EATs) for secure onboarding.
-    - Simple Management API endpoints (REST).
+   - IoT devices like ESP32, ESP32-S2 and ESP32-S3, preloaded with UDS (Unique Device Secrets).
+   - Entity Attestation Tokens (EATs) for secure onboarding.
+   - Simple Management API endpoints (REST).
 2. **Edge Layer**
-    - Lightweight Kubernetes clusters (K3s) for edge computing.
-    - Akri for IoT-specific device discovery and resource allocation.
-    - A custom operator & Custom Resource Definition (CRD) for cloud-native OTA updates.
+   - Lightweight Kubernetes clusters (K3s) for edge computing.
+   - Akri for IoT-specific device discovery and resource allocation.
+   - A custom operator & Custom Resource Definition (CRD) for cloud-native OTA updates.
 3. **Cloud Layer**
-    - Centralized Kubernetes clusters with advanced orchestration.
-    - Cloud-based device management, analytics, and OTA update services.
+   - Centralized Kubernetes clusters with advanced orchestration.
+   - Cloud-based device management, analytics, and OTA update services.
 4. **Application Layer**
-    - Web-based dashboards and APIs for monitoring, control, and device insights.
+   - Web-based dashboards and APIs for monitoring, control, and device insights.
 
 #### **Detailed Architecture**
 
@@ -45,22 +45,22 @@ management.
 - **Entity Attestation Tokens (EATs)**: Used to authenticate devices upon initial onboarding.
 - **Board Ledger**: Maintains a registry of manufacturer-issued certificates to validate devices.
 - **Onboarding Process**:
-    1. Akri’s initial discovery handler (DH1) finds an AP with a specific SSID
-       (hashed using a board unique identifier from the ledger). The discovery
-       handler connects to this AP and sets up credentials for the site’s IoT WiFi
-       network.
-    2. The device reboots and connects to the site’s IoT WiFi network.
-    3. The board discovery handler (DH2) scans the site’s IoT WiFi network for
-       devices with a specific type (/type endpoint) and initiates the
-       onboarding process.
-    4. The device generates the EAT, encrypts it using the key derived from the
-       UDS and signs it using the attestation certificate. The payload is sent
-       to the onboarding process (DH2).
-    5. The board discovery handler (DH2) relays the payload to the attestation
-       server. If the attestation server responds with an ACK, the discovery
-       handler continues with onboarding the device (send to agent/controller,
-       populate akri instances etc.).
-    6. Once validated, the device is added to the KubeChoros ecosystem.
+  1. Akri’s initial discovery handler (DH1) finds an AP with a specific SSID
+     (hashed using a board unique identifier from the ledger). The discovery
+     handler connects to this AP and sets up credentials for the site’s IoT WiFi
+     network.
+  2. The device reboots and connects to the site’s IoT WiFi network.
+  3. The board discovery handler (DH2) scans the site’s IoT WiFi network for
+     devices with a specific type (/type endpoint) and initiates the
+     onboarding process.
+  4. The device generates the EAT, encrypts it using the key derived from the
+     UDS and signs it using the attestation certificate. The payload is sent
+     to the onboarding process (DH2).
+  5. The board discovery handler (DH2) relays the payload to the attestation
+     server. If the attestation server responds with an ACK, the discovery
+     handler continues with onboarding the device (send to agent/controller,
+     populate akri instances etc.).
+  6. Once validated, the device is added to the KubeChoros ecosystem.
 
 **(!) Current State**
 
@@ -120,21 +120,21 @@ TODO:
 ##### **OTA Updates**
 
 - **OTA Update Process**:
-    1. The KubeChoros operator receives a request to re-purpose one or more devices.
-    2. The operator queries the k8s database for Akri instances matching the repurpose filter and spawns flashjob pods with the respective parameters:
-        - Flashjob endpoint IP (host IP)
-        - Flashjob container image
-        - Device IP endpoint
-        - Device firmware OCI image
-        - ???
-    3. Service for creation of external IPs to give a routable IP in the flashjobs, which will be the IP of the OTA process.
-    4. The Flashjob pod is spawned and issues an API call to trigger the OTA process on the device.
-    5. The Device starts the OTA update process, following the same process as
-       in the onboarding case (steps 4-5). Once the validation is complete, the
-       device listens for firmware updates by the flashjob pod.
-    6. The device requests the updated firmware from the flashjob
-    7. The device reboots to the updated firmware and should probably go
-       through the onboarding process again (steps 3-6).
+  1. The KubeChoros operator receives a request to re-purpose one or more devices.
+  2. The operator queries the k8s database for Akri instances matching the repurpose filter and spawns flashjob pods with the respective parameters:
+     - Flashjob endpoint IP (host IP)
+     - Flashjob container image
+     - Device IP endpoint
+     - Device firmware OCI image
+     - ???
+  3. Service for creation of external IPs to give a routable IP in the flashjobs, which will be the IP of the OTA process.
+  4. The Flashjob pod is spawned and issues an API call to trigger the OTA process on the device.
+  5. The Device starts the OTA update process, following the same process as
+     in the onboarding case (steps 4-5). Once the validation is complete, the
+     device listens for firmware updates by the flashjob pod.
+  6. The device requests the updated firmware from the flashjob
+  7. The device reboots to the updated firmware and should probably go
+     through the onboarding process again (steps 3-6).
 - **Delta Updates**: Minimized bandwidth usage by packaging the firmware in OCI
   images and grouping applications into OCI manifests.
 

@@ -19,5 +19,3 @@ To begin your journey:
 - Consult the [API](../api) Documentation: Integrate your applications seamlessly using our comprehensive APIs.
 
 Embark on building scalable, secure, and efficient IoT solutions with the Cloud-Native IoT platform.
-
-

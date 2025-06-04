@@ -25,11 +25,12 @@ view some information about the device you are working on, run:
 esptool.py flash_id
 ```
 
-In the next steps, you will have to set  the flash size in menuconfig, as long as the target device.
+In the next steps, you will have to set the flash size in menuconfig, as long as the target device.
 
 ### Step 2
 
 Set the target device by running:
+
 ```
 idf.py set-target <dev-target>
 ```
@@ -37,6 +38,7 @@ idf.py set-target <dev-target>
 ### Step 3
 
 Set the flash size in your sdkconfig file by using
+
 ```
 idf.py menuconfig
 ```
@@ -45,7 +47,7 @@ And set the right value in `Serial flasher config -> Flash size`
 
 ### Step 4
 
-Generate a secure boot signing key v2. 
+Generate a secure boot signing key v2.
 
 **Important**
 The keys used to sign binary images (bootloader, application, partition table)
@@ -159,11 +161,13 @@ idf.py flash
 ```
 
 ### Step 8
+
 Finally, we can execute our application by running:
 
 ```
 idf.py monitor
 ```
+
 and you will see the output of the application on the terminal. Secure Boot is
 now enabled and works fine if the output is the expected.
 
@@ -190,6 +194,7 @@ to sign your application and
 ```
 espsecure.py sign_data --version 2 --keyfile PRIVATE_SIGNING_KEY --output build/partition_table/partition-table.bin build/partition_table/partition-table-signed.bin
 ```
+
 to sign your partition table.
 
 Now, based on the offsets configured on the partition table (say, `0x10000` for

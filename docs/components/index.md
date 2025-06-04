@@ -26,9 +26,8 @@ the Cloud-native IoT project.
 
 <!---- Observability: Metrics, logs, and tracing are integrated to monitor device health, OTA progress, and offload performance. -->
 
-
   <!-- [:octicons-arrow-right-24: Read More](../flashjob-operator/overview.md) -->
-<!-- 
+<!--
 # Onboarding Overview
 
 Secure device onboarding is a cornerstone of our platform, enabling zero-touch, verifiable registration of edge devices. The onboarding workflow is anchored on the **DICE (Device Identifier Composition Engine)** standard and integrated with Akri to register and expose trusted devices within Kubernetes.

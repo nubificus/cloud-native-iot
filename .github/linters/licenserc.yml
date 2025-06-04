@@ -18,23 +18,23 @@ header:
       limitations under the License.
 
   paths-ignore:
-    - '**/.*'
-    - '**/*.md'
-    - '**/*.txt'
-    - '**/*.build'
-    - '**/*.options'
-    - '**/*.cmake'
-    - '**/*.cmake.in'
-    - '**/*.pc.in'
-    - '**/*.toml'
-    - '**/*.yml'
-    - '**/Makefile'
-    - '.github'
-    - 'LICENSE'
-    - 'NOTICE'
-    - 'source/conf.py'
-    - 'docs'
-    - 'outdated_docs'
-    - 'overrides'
+    - "**/.*"
+    - "**/*.md"
+    - "**/*.txt"
+    - "**/*.build"
+    - "**/*.options"
+    - "**/*.cmake"
+    - "**/*.cmake.in"
+    - "**/*.pc.in"
+    - "**/*.toml"
+    - "**/*.yml"
+    - "**/Makefile"
+    - ".github"
+    - "LICENSE"
+    - "NOTICE"
+    - "source/conf.py"
+    - "docs"
+    - "outdated_docs"
+    - "overrides"
 
   comment: on-failure

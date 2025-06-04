@@ -8,6 +8,3 @@ This guide walks you through the essential steps to deploy the Cloud-Native IoT 
 - `kubectl` & `helm` installed
 - containerd runtime
 - ESP32 development board or Linux device (for onboarding test)
-
-
-

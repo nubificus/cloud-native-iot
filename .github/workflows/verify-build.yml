@@ -5,10 +5,10 @@ on:
     inputs:
       actions-repo:
         type: string
-        default: 'nubificus/vaccel'
+        default: "nubificus/vaccel"
       actions-rev:
         type: string
-        default: 'main'
+        default: "main"
       strict:
         type: boolean
         default: false
@@ -17,7 +17,7 @@ on:
         default: false
       external-payload:
         type: string
-        default: ''
+        default: ""
     secrets:
       GIT_CLONE_PAT:
         required: false
@@ -52,7 +52,7 @@ jobs:
       - name: Initialize workspace
         uses: ./.github/actions/initialize-workspace
         with:
-          submodules: 'true'
+          submodules: "true"
           remote-actions-repo: ${{ inputs.actions-repo }}
           token: >-
             ${{ steps.generate-token.outputs.token ||

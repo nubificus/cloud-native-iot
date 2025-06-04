@@ -1,29 +1,29 @@
 nav:
   - Home: index.md
-  - Getting started: 
-    - getting-started/index.md
-    - getting-started/prerequisites.md
-    - getting-started/quickstart.md
-    - getting-started/installation.md
+  - Getting started:
+      - getting-started/index.md
+      - getting-started/prerequisites.md
+      - getting-started/quickstart.md
+      - getting-started/installation.md
   - Architecture:
-    - architecture/index.md
-  - Components: 
-    - components/index.md
-    - components/attestation-server.md
-    - components/ota-service.md
-    - components/ota-agent.md
-    - components/akri-dh.md
-    - components/akri-integration.md
-    - components/flashjob.md
-    - components/firmware-signing.md
+      - architecture/index.md
+  - Components:
+      - components/index.md
+      - components/attestation-server.md
+      - components/ota-service.md
+      - components/ota-agent.md
+      - components/akri-dh.md
+      - components/akri-integration.md
+      - components/flashjob.md
+      - components/firmware-signing.md
   - Developers:
-    - developer/architecture.md
-    - developer/applications.md
-    - developer/building.md
-      #- developer/testing.md
-      #- developer/debugging.md
-      #- developer/contributing.md
-  - API: 
-    - api/index.md
-    - api/openapi-spec.md
+      - developer/architecture.md
+      - developer/applications.md
+      - developer/building.md
+        #- developer/testing.md
+        #- developer/debugging.md
+        #- developer/contributing.md
+  - API:
+      - api/index.md
+      - api/openapi-spec.md
   - FAQ: faq.md

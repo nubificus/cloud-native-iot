@@ -11,6 +11,7 @@ Our Cloud-Native IoT Platform is designed to securely manage heterogeneous IoT d
 Figure 1 presents a high-level architecture diagram of our framework.
 
 ![Figure 1: Cloud-native IoT Framework Architecture](../assets/images/cniot-architecture.svg){width="800"}
+
 ## Key Technologies
 
 - Akri for device discovery and Kubernetes resource mapping.
@@ -27,4 +28,3 @@ Figure 1 presents a high-level architecture diagram of our framework.
 - [Discovery Endpoints](../components/esp32-akri.md)
 
 For a component-level breakdown, see [Components](../components/index.md).
-

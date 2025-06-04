@@ -1,6 +1,6 @@
 ---
 hide:
-    - toc
+  - toc
 ---
 
 # Cloud-Native IoT

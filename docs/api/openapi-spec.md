@@ -1,8 +1,7 @@
-
 # Device API
 
 **Version:** 0.1.0  
-**Base path:** *(Device-local address, e.g., `http://{device-ip}`)*
+**Base path:** _(Device-local address, e.g., `http://{device-ip}`)_
 
 ---
 
@@ -14,6 +13,7 @@
 **Description:** Retrieve static information about the IoT device.
 
 **Responses:**
+
 - `200 OK`: JSON representation of the device
 
 ```json
@@ -32,6 +32,7 @@
 **Description:** Obtain the device’s attestation certificate in PEM format.
 
 **Responses:**
+
 - `200 OK`: PEM-encoded certificate (Content-Type: `application/x-pem-file`)
 - `500 Internal Server Error`: Certificate retrieval error
 
@@ -61,6 +62,7 @@ Example Error:
 ```
 
 **Responses:**
+
 - `200 OK`: Update initiated
 - `400 Bad Request`: Invalid update request
 - `500 Internal Server Error`: Update process failed
@@ -82,6 +84,7 @@ Error Example:
 **Description:** Retrieve static information about the deployed application on the IoT device.
 
 **Responses:**
+
 - `200 OK`: JSON representation of the app
 
 ```json
@@ -92,4 +95,3 @@ Error Example:
   "version": "1.0.0"
 }
 ```
-
