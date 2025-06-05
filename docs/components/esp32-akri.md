@@ -2,6 +2,15 @@
 
 ESP32 Component for managing the akri-related http endpoints of the device. The component does not contain the handlers, only the functions to setup handlers for the akri-specific endpoints. The corresponding handler functions are contained into the `ota-service` component.
 
+## Responsibilities
+
+- Provide functions that enable the user to set handlers for various events, like information request, onboarding request and update request.
+- Manage all the rest HTTP endpoints by letting the user set handlers for any endpoint, start and stop the HTTP server.
+
+## Deployment Notes
+
+- Packaged as an `ESP-IDF` component.
+
 ## How to use
 
 ```bash
@@ -75,7 +84,7 @@ the request and initialize a TLS (secure) connection between the device and the
 Agent. If the authentication succeeds, the device will receive the new
 firmware.
 
-### `/onboard` (FIXME)
+### `/onboard`
 
 Currently, the `/onboard` endpoint waits for GET requests, and responds with
 the Attestation Certificate in PEM format. The purpose of this endpoint is to
