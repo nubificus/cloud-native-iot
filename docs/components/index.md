@@ -22,7 +22,7 @@ the Cloud-native IoT project.
 ## Cloud-Native Infrastructure
 
 - [Kubernetes & Operators](flashjob.md): All components are deployed and managed using Kubernetes primitives, custom resource definitions (CRDs), and operators.
-- [Application building & packaging](../developer/building.md): All components are built and packaged using standard cloud-native tooling.
+- [Application building](../developer/build_automation.md): All components are built and packaged using standard cloud-native tooling.
 
 <!---- Observability: Metrics, logs, and tracing are integrated to monitor device health, OTA progress, and offload performance. -->
 
