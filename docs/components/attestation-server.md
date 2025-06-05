@@ -16,7 +16,11 @@ Thus, whenever the attestation server receives an incoming POST request with an
 attestation certificate on its body, it traverses its database to check whether
 there is any certificate that verifies the given one. In case of verification,
 it responds with a `200 OK` HTTP code. Otherwise, the client will receive some
-error HTTP code. Attestation Server
+error HTTP code.
+
+It's important to clarify that the Redis Database is an example solution, to avoid
+any misunderstanding about security concerns. One could simply utilize another tool
+to store the Root certificates of the devices.
 
 ## Dice
 
@@ -62,20 +66,15 @@ against the root can be achieved with the following command:
 openssl verify -verbose -ignore_critical -CAfile root.pem attestation.pem
 ```
 
-### Dice source
+## Workflow
 
-The source code used to generate both root and attestation Dice certificates
-can be found in our github repo `nubificus/nbfc-dice`. In
-`nbfc-dice/src/main.c` there's a host-side program that builds both the root
-and attestation certificate in DER format, using the UDS and hashes like
-firmware image hash, or bootloader hash. Saying that, a certificate in binary
-format (DER) can be transformed to text-based (PEM) using the following OpenSSL
-command:
+1. Initialize HTTP server
+2. Wait for upcoming connections
+3. For each valid POST request (containing an attestation certificate on its body):
+   - Retrieve the root certificates contained in the Redis Database
+   - Check if any Root certificate verifies the incoming Attest. certificate
+   - In case of success, respond with `200 OK`. Otherwise respond with an error code
 
-```bash
-openssl x509 -inform der -in cert.der -out cert.pem
-```
+For more information, see the [tutorial](/tutorials/dice-auth).
 
-On the other side, a piece of code that generates the attestation certificate
-on the device side can be found in
-`nbfc-dice/dice_esp32_app/main/dice_app_example_main.c`.
+![Figure 1](../assets/images/dice-auth.png){width="1000"}
