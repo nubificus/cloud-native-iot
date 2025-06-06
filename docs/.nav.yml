@@ -11,6 +11,7 @@ nav:
       - components/index.md
       - components/attestation-server.md
       - components/ota-service.md
+      - components/esp32-akri.md
       - components/ota-agent.md
       - components/akri-dh.md
       - components/akri-integration.md

@@ -10,7 +10,6 @@ an IP address on its body, like `ip: A.B.C.D`. This IP belongs to the agent,
 which should have been executed earlier. The agent requires the following
 arguments to run, which are given as environment variables:
 
-<!-- ![Figure 1](../../assets/images/ota-process-1.png) -->
 
 - `NEW_FIRMWARE_PATH`: The path to the firmware that will be sent to the
   microcontroller (on success)
@@ -27,33 +26,27 @@ arguments to run, which are given as environment variables:
 The OTA Agent runs on each device and manages update retrieval and installation
 in a secure and verifiable manner.
 
-<!-- ![Figure 2](../../assets/images/ota-process-2.png) -->
-
 ## Responsibilities
 
-- Fetch updates from global registry
-- Relay update to leaf device
-
-## Supported Devices
-
-- **ESP32**: Written in C, flashes new firmware via `esp32_ota_update` API.
-- **Linux-class**: Deploys updated container image.
+- Verify the connected device against an attestation server
+- On success, transmit the firmware to leaf device
+- On failure, close the connection
 
 ## Configuration
 
-- `OTA_ENDPOINT`: URL of OTA Service
-- `DEVICE_ID`: Unique identifier for the device
-- `TLS_CERT_PATH` / `TLS_KEY_PATH`: For secure communication
+- `DICE_AUTH_URL`: URL of the attestation server
+- `NEW_FIRMWARE_PATH`: Where to find the new firmware to be used in OTA update
+- `SERVER_CRT_PATH` & `SERVER_KEY_PATH`: TLS certificate and private key For secure communication
 
 ## Example Flow
 
-1. Agent contacts device to initiate the update process.
-2. Device contacts Agent to establish TLS connection and provide its certificate.
-3. Agent verifies device's identity and moves on to the update process.
-4. Agent downloads firmware blob via HTTPS.
-5. Agent writes the firwware blob on a listening port of the device.
-6. Device checks & verifies the newly fetched firmware.
-7. Device applies update and reboots.
+1. Agent starts a TLS server (`SERVER_CRT_PATH` & `SERVER_KEY_PATH`)
+2. Device (after notified) connects to the agent
+3. Device transmits its attestation certificate
+4. Agent verifies device's identity against the attestation server (`DICE_AUTH_URL`).
+5. On success, the agent will read the firmware from `NEW_FIRMWARE_PATH` and will send it to device
+6. The device applies the update after receiving the entire firmware image and reboots
+6. On failure, the connection will be closed by the agent and no firmware will be transmitted.
 
 Updates are only allowed for devices that passed DICE-based onboarding.
 
@@ -65,3 +58,6 @@ cd ota-agent
 cd  mbedtls && git submodule update --init && make -j$(nproc) && cd -
 make
 ```
+
+![Figure 1](../assets/images/ota-process-1.png){width="1000"}
+![Figure 2](../assets/images/ota-process-2.png){width="1000"}
