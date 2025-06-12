@@ -16,6 +16,8 @@ nav:
       - components/akri-dh.md
       - components/akri-integration.md
       - components/flashjob.md
+      - components/flashjob-pod.md
+      - components/go-akri.md
       - components/firmware-signing.md
   - Tutorials:
       - tutorials/ota-agent.md
