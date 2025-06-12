@@ -7,6 +7,7 @@ nav:
       - getting-started/installation.md
   - Architecture:
       - architecture/index.md
+      - architecture/ota-workflow.md
   - Components:
       - components/index.md
       - components/attestation-server.md
