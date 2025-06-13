@@ -8,6 +8,7 @@ nav:
   - Architecture:
       - architecture/index.md
       - architecture/ota-workflow.md
+      - architecture/onboarding.md
   - Components:
       - components/index.md
       - components/attestation-server.md
