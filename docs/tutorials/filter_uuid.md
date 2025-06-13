@@ -36,6 +36,13 @@ The `filter_uuid.py` script performs the following tasks:
 
 ### 1. Run the Script
 
+To use the `filter_uuid.py` script, first clone the FlashJob Operator repository:
+
+```bash
+git clone https://github.com/nubificus/flashjob_operator
+cd flashjob_operator
+```
+
 Execute the script in a terminal:
 
 ```bash
