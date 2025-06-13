@@ -7,7 +7,7 @@ nav:
       - getting-started/installation.md
   - Architecture:
       - architecture/index.md
-      - architecture/flashjob.md
+      - architecture/flashjobworkflow.md
   - Components:
       - components/index.md
       - components/attestation-server.md
