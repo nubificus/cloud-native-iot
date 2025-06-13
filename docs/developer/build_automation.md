@@ -5,6 +5,7 @@
 Building and packaging firmware for embedded devices such as ESP32 can be deceptively complex. The process typically involves managing toolchains, setting device-specific configurations, embedding application models (like TFLite), optionally signing binaries, and deploying the resulting firmware across diverse hardware targets.
 
 This section explains:
+
 - Common industry practices for firmware building and update workflows.
 - How ESP-IDF-based firmware is typically built.
 - How our `esp32-build` automation system simplifies this process.
@@ -29,13 +30,13 @@ Cloud providers such as AWS IoT and Azure IoT Hub offer end-to-end device manage
 
 ### Industry VS Our CI-based Method
 
-| Feature               | AWS / Azure IoT                                    | Our Approach |
-|-----------------------|----------------------------------------------------|--------------|
-| Binary Distribution   | Blob Storage (S3 / Azure Blob)                     | OCI Image Registry (Harbor, DockerHub) |
-| Device Targeting      | Device Shadow / Twin                               | OCI image tags + Manifest |
-| CI/CD Integration     | CodeBuild, Azure DevOps (manual setup)             | GitHub Actions-native |
-| OTA Update            | Vendor-managed OTA infrastructure                  | [`esp32-flashjob`](https://github.com/nubificus/esp32-flashjob) |
-| Extensibility         | Vendor lock-in                                     | Open, OCI-compliant, portable |
+| Feature             | AWS / Azure IoT                        | Our Approach                                                    |
+| ------------------- | -------------------------------------- | --------------------------------------------------------------- |
+| Binary Distribution | Blob Storage (S3 / Azure Blob)         | OCI Image Registry (Harbor, DockerHub)                          |
+| Device Targeting    | Device Shadow / Twin                   | OCI image tags + Manifest                                       |
+| CI/CD Integration   | CodeBuild, Azure DevOps (manual setup) | GitHub Actions-native                                           |
+| OTA Update          | Vendor-managed OTA infrastructure      | [`esp32-flashjob`](https://github.com/nubificus/esp32-flashjob) |
+| Extensibility       | Vendor lock-in                         | Open, OCI-compliant, portable                                   |
 
 ## ESP-IDF Build
 
@@ -64,6 +65,7 @@ idf.py -p /dev/ttyUSB0 monitor
 ```
 
 Although this works well for single-target builds, it becomes cumbersome when:
+
 - Supporting multiple hardware variants (e.g. `esp32s3`, `esp32s2`, etc.).
 - Managing different RAM configurations (e.g. quad/octal PSRAM, internal RAM).
 - Creating custom partition tables based not only on the app but also on the hardware target's capabilities.
@@ -116,7 +118,7 @@ While the building process is quite complex and involves several steps, the most
 
 3. Any additional app variables provided by the user are defined as environment variables.
 
-4. If any target device has the suffixes `r2` or `r8`, the workflow will set the `quad_psram` or `oct_psram` environment variables, respectively. The user can utilize these variables in their project builder to enable the external PSRAM of their device. 
+4. If any target device has the suffixes `r2` or `r8`, the workflow will set the `quad_psram` or `oct_psram` environment variables, respectively. The user can utilize these variables in their project builder to enable the external PSRAM of their device.
 
 5. If the user has specified a "prebuild" field that points to a preparation script within the project repository, the workflow will execute it.
 
@@ -131,4 +133,4 @@ While the building process is quite complex and involves several steps, the most
 10. Finally, the workflow creates an initial flashing container image that the user can use to physically flash the esp32 device with the previously generated binary artifacts. This container image contains binary artifacts for all device types, and the user can specify the desired type during the `docker run` execution. Additionally, since flashing container images are constructed for both x86 and ARM architectures, the workflow generates a single manifest containing both.
 
 ![Figure 1](../assets/images/esp32-build.png)
-*Figure 1: Example of workflow execution flow illustrating the creation of three firmware building jobs, three firmware container building jobs, and two flashing container building jobs for each of the three device types and two architectures. Additionally, there are two final jobs for assembling the containers into single manifests.*
+_Figure 1: Example of workflow execution flow illustrating the creation of three firmware building jobs, three firmware container building jobs, and two flashing container building jobs for each of the three device types and two architectures. Additionally, there are two final jobs for assembling the containers into single manifests._

@@ -16,6 +16,7 @@ However, as systems scale, this manual approach becomes infeasible and introduce
 Consider an application such as a **smart air quality sensor** deployed across a whole city. You might start with a handful of devices but eventually grow to manage hundreds or thousands.
 
 Challenges emerge when:
+
 - A **critical firmware update** needs to be pushed to all devices.
 - You want **centralized monitoring and lifecycle management** of each sensor node.
 
@@ -25,10 +26,10 @@ In such cases, physically accessing and flashing each device is impractical and 
 
 To address these limitations, we have developed the following two components as part of our Cloud-Native IoT Platform, which users can integrate into their ESP32 applications:
 
-| Component | Purpose |
-|----------|---------|
-| [`esp32-akri`](https://github.com/nubificus/esp32-akri) | Enables ESP32 devices to register with Kubernetes clusters via Akri, facilitating automated discovery and management. |
-| [`ota-service`](https://github.com/nubificus/ota-service) | Provides secure over-the-air (OTA) firmware updates for ESP32, eliminating the need for manual reflashing. |
+| Component                                                 | Purpose                                                                                                               |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [`esp32-akri`](https://github.com/nubificus/esp32-akri)   | Enables ESP32 devices to register with Kubernetes clusters via Akri, facilitating automated discovery and management. |
+| [`ota-service`](https://github.com/nubificus/ota-service) | Provides secure over-the-air (OTA) firmware updates for ESP32, eliminating the need for manual reflashing.            |
 
 Together, they enable ESP32 devices to become manageable, cloud-native compute nodes.
 
@@ -97,10 +98,11 @@ esp_err_t info_get_handler(httpd_req_t *req)
 ### 5. Handling Configuration via Root CMake
 
 Those two components require the following environment variables:
-* `FIRMWARE_VERSION`: A unique version identifier for the application you are working on.
-* `DEVICE_TYPE`: The specific ESP32 target for which you will build this application.
-* `APPLICATION_TYPE`: The type of application you are developing (e.g. image_classification, etc.).
-* `OTA_SECURE`: Set this variable when you want to use secure OTA update services.
+
+- `FIRMWARE_VERSION`: A unique version identifier for the application you are working on.
+- `DEVICE_TYPE`: The specific ESP32 target for which you will build this application.
+- `APPLICATION_TYPE`: The type of application you are developing (e.g. image_classification, etc.).
+- `OTA_SECURE`: Set this variable when you want to use secure OTA update services.
 
 Edit your root `CMakeLists.txt` to handle environment configuration by adding the code below:
 
@@ -170,6 +172,7 @@ idf.py --port /dev/ttyUSB0 flash monitor
 ```
 
 Once deployed, your device will be:
+
 - Discoverable through Akri.
 - OTA-ready for firmware updates.
 - Exposing device metadata via HTTP.
@@ -181,4 +184,4 @@ Integrating Akri and OTA-Service into your ESP32 firmware empowers you with prod
 - Scalable remote firmware management.
 - Dynamic discovery and orchestration through Kubernetes.
 
-When combined with the advanced CI/CD pipeline outlined in the [Build Automation](./build_automation_.md) section, you can achieve a streamlined development process that enhances efficiency, reduces deployment times, and ensures consistent application performance across your IoT devices.
+When combined with the advanced CI/CD pipeline outlined in the [Build Automation](./build_automation.md) section, you can achieve a streamlined development process that enhances efficiency, reduces deployment times, and ensures consistent application performance across your IoT devices.
