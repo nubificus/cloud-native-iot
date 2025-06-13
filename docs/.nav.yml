@@ -8,14 +8,19 @@ nav:
   - Architecture:
       - architecture/index.md
       - architecture/flashjobworkflow.md
+      - architecture/ota-workflow.md
+      - architecture/onboarding.md
   - Components:
       - components/index.md
       - components/attestation-server.md
       - components/ota-service.md
+      - components/esp32-akri.md
       - components/ota-agent.md
       - components/akri-dh.md
       - components/akri-integration.md
       - components/flashjob.md
+      - components/flashjob-pod.md
+      - components/go-akri.md
       - components/firmware-signing.md
   - Tutorials:
       - tutorials/ota-agent.md
@@ -26,7 +31,9 @@ nav:
   - Developers:
       - developer/architecture.md
       - developer/applications.md
-      - developer/building.md
+      - developer/build_automation.md
+      - developer/firmware_packaging.md
+      - developer/initial_flash_packaging.md
         #- developer/testing.md
         #- developer/debugging.md
         #- developer/contributing.md
