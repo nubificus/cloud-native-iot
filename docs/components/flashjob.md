@@ -72,7 +72,7 @@ The controller, implemented in `internal/controller/flashjob_controller.go`, man
 
 Below is an example FlashJob resource definition, located at `config/samples/application_v1alpha1_flashjob.yaml`:
 
-```
+```yaml
 apiVersion: application.flashjob.nbfc.io/v1alpha1
 kind: FlashJob
 metadata:
