@@ -2,7 +2,7 @@
 
 The FlashJob Operator is a key part of our Cloud-Native IoT Platform, built to automate and simplify the firmware update process for IoT devices within Kubernetes-based deployments. This guide explains how the FlashJob works.
 
-![alt text](/docs/assets/images/flashjob_lifecycle.drawio.png)
+![FlashJob Lifecycle Diagram](/docs/assets/images/flashjob_lifecycle.png){width="800"}
 
 The lifecycle begins when a user creates a FlashJob Custom Resource (CR) in Kubernetes, specifying the device UUID, firmware, and version. The FlashJob Controller detects this creation and initiates a reconciliation loop to align the system with the desired state. It queries Akri to validate the device UUID and retrieve essential metadata, such as HOST_ENDPOINT and DEVICE details.
 
