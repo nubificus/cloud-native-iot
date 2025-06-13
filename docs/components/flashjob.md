@@ -1,4 +1,3 @@
-
 # Flashjob Operator
 
 The FlashJob Operator is a Kubernetes operator designed to automate the process of flashing firmware to devices using Akri instances. It manages the lifecycle of FlashJob custom resources, which define the parameters for firmware updates, and orchestrates the necessary Kubernetes resources such as Pods and Services to perform the flashing operations.
@@ -6,13 +5,12 @@ The FlashJob Operator is a Kubernetes operator designed to automate the process 
 FlashJob is composed of a CRD, a controller, and CR.
 Below, each of these components is described in detail.
 
-
-
-### Custom Resource Definition (CRD)
+## Custom Resource Definition (CRD)
 
 The FlashJob CRD defines the schema for the custom resource managed by the operator. It is located at `config/crd/bases/application.flashjob.nbfc.io_flashjobs.yaml`.
 
 ### Spec
+
 - **UUID**: Unique identifier for the device.
 - **Firmware**: The firmware image to be flashed.
 - **Version**: The version of the firmware.
@@ -20,9 +18,10 @@ The FlashJob CRD defines the schema for the custom resource managed by the opera
 - **Device**: The type of device (e.g., `esp32s2`).
 - **ApplicationType**: The type of application (e.g., `thermo`).
 - **ExternalIP**: The external IP address of the service.
-- **FlashjobPodImage**: The container image used from the  flash pod.
+- **FlashjobPodImage**: The container image used from the flash pod.
 
 ### Status
+
 - **Conditions**: A list of conditions representing the current state of the FlashJob.
 - **Message**: A human-readable message describing the current state.
 - **HostEndpoint**: The endpoint of the host where the device is connected.
@@ -33,42 +32,46 @@ The FlashJob CRD defines the schema for the custom resource managed by the opera
 
 The controller, implemented in `internal/controller/flashjob_controller.go`, manages the lifecycle of FlashJob resources through a reconciliation loop. It ensures the desired state specified in the FlashJob resource is achieved by handling the creation, updating, and deletion of associated Pods and Services.
 
-### Key Functions:
+### Key Functions
 
 - **Reconcile:**
-    - The main reconciliation loop that handles the creation and updating of FlashJob resources.
 
-    - Ensures that the desired state (defined in the FlashJobSpec) matches the observed state.
+  - **Reconciliation Loop**
+  - The main reconciliation loop that handles the creation and updating of FlashJob resources.
+  - Ensures that the desired state (defined in the `FlashJobSpec`) matches the observed state.
+  - Manages the lifecycle of associated Pods and Services.
 
-    - Manages the lifecycle of associated Pods and Services.
+- **getAkriInstanceDetails**
 
-- **getAkriInstanceDetails:**
-    - Retrieves details about the Akri instance associated with the device UUID.
+  - Retrieves details about the Akri instance associated with the device UUID.
 
-- **handleFlashingPod:**
-    - Manages the creation and updating of the flashing Pod.
-    - Creates a Pod using the FlashjobPodImage and configures it with environment variables such as FIRMWARE, UUID, HOST_ENDPOINT, and DEVICE.
+- **handleFlashingPod**
 
-- **createService:**
-    - Creates a LoadBalancer Service per Pod with a unique external IP.
+  - Manages the creation and updating of the flashing Pod.
+  - Creates a Pod using the `FlashjobPodImage` and configures it with environment variables such as `FIRMWARE`, `UUID`, `HOST_ENDPOINT`, and `DEVICE`.
 
-- **waitForServiceIP:**
-    - Waits for the Service to acquire an external IP.
+- **createService**
 
-    - Updates the FlashJob resource with the external IP once it is available.
+  - Creates a `LoadBalancer` Service per Pod with a unique external IP.
 
-- **updateFlashJobStatus:**
-    - Updates the FlashJob status based on Pod phase and deletes completed resources.
+- **waitForServiceIP**
 
-- **handleDeletion:**
-    - Handles the deletion of FlashJob resources.
+  - Waits for the Service to acquire an external IP.
+  - Updates the `FlashJob` resource with the external IP once it is available.
 
-    - Cleans up associated resources such as Pods and Services.
+- **updateFlashJobStatus**
 
-    - Removes the finalizer to allow the resource to be deleted from the cluster.
+  - Updates the `FlashJob` status based on Pod phase and deletes completed resources.
+
+- **handleDeletion**
+  - Handles the deletion of `FlashJob` resources.
+  - Cleans up associated resources such as Pods and Services.
+  - Removes the finalizer to allow the resource to be deleted from the cluster.
 
 ### Example FlashJob Resource
+
 Below is an example FlashJob resource definition, located at `config/samples/application_v1alpha1_flashjob.yaml`:
+
 ```
 apiVersion: application.flashjob.nbfc.io/v1alpha1
 kind: FlashJob
@@ -101,7 +104,6 @@ spec:
 - **applicationType:** The type of application (e.g., thermo).
 
 - **flashjobPodImage:** The container image used from the pod.
-
 
 ## How It Works
 
