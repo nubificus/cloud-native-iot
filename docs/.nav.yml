@@ -7,7 +7,7 @@ nav:
       - getting-started/installation.md
   - Architecture:
       - architecture/index.md
-      #- architecture/flashjob.md
+      - architecture/flashjob.md
   - Components:
       - components/index.md
       - components/attestation-server.md
@@ -17,6 +17,12 @@ nav:
       - components/akri-integration.md
       - components/flashjob.md
       - components/firmware-signing.md
+  - Tutorials:
+      - tutorials/ota-agent.md
+      - tutorials/dice-auth.md
+      - tutorials/ota-service.md
+      - tutorials/akri-esp32.md
+      - tutorials/tutorials\filter_uuid.md
   - Developers:
       - developer/architecture.md
       - developer/applications.md
