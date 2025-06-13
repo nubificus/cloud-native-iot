@@ -19,7 +19,9 @@ nav:
   - Developers:
       - developer/architecture.md
       - developer/applications.md
-      - developer/building.md
+      - developer/build_automation.md
+      - developer/firmware_packaging.md
+      - developer/initial_flash_packaging.md
         #- developer/testing.md
         #- developer/debugging.md
         #- developer/contributing.md
