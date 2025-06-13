@@ -58,4 +58,4 @@ The FlashJob Operator can be deployed to a Kubernetes cluster using one of the f
    kubectl delete namespace operator-system
    ```
 
-For more information and advanced usage, please refer to the [FlashJob Components](../components/flashjob.md) and the [FlashJob tutorial](../tutorials/flashjob.md).
+For more information and advanced usage, please refer to the [FlashJob Components](../components/flashjob.md) and the [FlashJob tutorial](../tutorials/filter_uuid.md).
