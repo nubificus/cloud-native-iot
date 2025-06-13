@@ -10,4 +10,4 @@ With this information, the Controller sets up a Service for external access and 
 
 As the update progresses, the FlashPod monitors the process and updates its status. Upon success, the Controller marks the FlashJob CR as "Succeeded," deletes the FlashPod and Service, and records the device UUID in the CompletedUUIDs list. This structured flow ensures efficient firmware management across IoT devices in a cloud-native environment.
 
-For the full source code, see the [FlashJob Operator GitHub repository](https://github.com/nubificus/flashjob_operator) and for more details about the flashjob component see [here](..\components\flashjob.md)
+For the full source code, see the [FlashJob Operator GitHub repository](https://github.com/nubificus/flashjob_operator) and for more details about the flashjob component see [here](../components/flashjob.md)
