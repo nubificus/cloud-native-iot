@@ -9,7 +9,9 @@ nav:
       - architecture/index.md
       - architecture/ota-workflow.md
       - architecture/onboarding.md
-      #- architecture/flashjob.md
+      - architecture/flashjobworkflow.md
+      - architecture/ota-workflow.md
+      - architecture/onboarding.md
   - Components:
       - components/index.md
       - components/attestation-server.md
@@ -27,6 +29,7 @@ nav:
       - tutorials/dice-auth.md
       - tutorials/ota-service.md
       - tutorials/akri-esp32.md
+      - tutorials/filter_uuid.md
   - Developers:
       - developer/architecture.md
       - developer/applications.md
