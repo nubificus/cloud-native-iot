@@ -6,10 +6,16 @@ Before you begin with the Cloud-Native IoT platform, make sure you have the foll
 
 ## 1. Hardware Requirements
 
-- **IoT Device**
-  - ESP32 / ESP32-S2 / ESP32-S3 dev board
-  - We have tested the following devices: [Supported Microcontroller List](https://github.com/nubificus/wiki/blob/main/infrastructure/microcontroller_nodes.md).
-  - *Note: - *Note: Use of other compatible boards is supported but not formally validated.\*
+## IoT Device
+**ESP32 / ESP32-S2 / ESP32-S3**  
+We have tested the following device types:  
+- ESP32-C6  
+- ESP32-S2R2  
+- ESP32-S3  
+- ESP32-D0WD-V3  
+
+*Note: Use of other compatible boards is supported but not formally validated.*
+
 - **Control Plane Node**
   - x86_64 VM or bare-metal
   - 2 vCPU, 4 GB RAM (min)
