@@ -2,10 +2,6 @@
 	path = components/flashjob_operator
 	url = https://github.com/nubificus/flashjob_operator.git
 	branch = uuid_array
-[submodule "components/akri-discovery-handler-go"]
-	path = components/akri-discovery-handler-go
-	url = https://github.com/nubificus/akri-discovery-handler-go.git
-	branch = main
 [submodule "components/inference-broker"]
 	path = components/inference-broker
 	url = https://github.com/nubificus/inference-broker.git
@@ -34,3 +30,9 @@
 	path = components/esp32-build
 	url = https://github.com/nubificus/esp32-build.git
 	branch = feat_img_with_bins
+[submodule "components/secure-http-discovery-handler"]
+	path = components/secure-http-discovery-handler
+	url = https://github.com/nubificus/secure-http-discovery-handler.git
+[submodule "components/go-akri"]
+	path = components/go-akri
+	url = https://github.com/nubificus/go-akri.git
