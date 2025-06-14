@@ -1,0 +1,46 @@
+name: Build and Verify
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  verify-build:
+    name: Verify Build
+    uses: ./.github/workflows/verify-build.yml
+    secrets: inherit
+
+  verify-build-strict:
+    name: Verify Build (Strict)
+    uses: ./.github/workflows/verify-build.yml
+    with:
+      strict: true
+    secrets: inherit
+
+  verify-links:
+    name: Verify Links
+    uses: ./.github/workflows/verify-links.yml
+    secrets: inherit
+
+  validate-files-and-commits:
+    name: Validate Files and Commits
+    uses: nubificus/vaccel/.github/workflows/validate-files-and-commits.yml@main
+    secrets: inherit
+
+  validate-code-and-markdown:
+    name: Validate Code and Markdown
+    uses: ./.github/workflows/validate-code-and-markdown.yml
+    secrets: inherit
+
+  # Dummy job for setting required checks
+  jobs-completed:
+    needs:
+      - verify-build
+      - verify-build-strict
+      - verify-links
+      - validate-files-and-commits
+      - validate-code-and-markdown
+    name: Jobs Completed
+    runs-on: base-2204-amd64
+    steps:
+      - run: exit 0
