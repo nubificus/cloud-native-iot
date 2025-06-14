@@ -2,162 +2,170 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/faq/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/api/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/api/openapi-spec/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/architecture/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/architecture/onboarding/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/architecture/ota-workflow/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/components/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/components/akri-dh/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/components/akri-integration/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/components/attestation-server/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/components/esp32-akri/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/components/firmware-signing/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/components/flashjob-pod/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/components/flashjob/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/components/go-akri/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/components/mbedtls/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/components/ota-agent/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/components/ota-service/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/developer/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/developer/applications/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/developer/architecture/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
-         <loc>https://nubificus.github.io/cloud-native-iot/developer/building/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <loc>https://nubificus.github.io/cloud-native-iot/developer/build_automation/</loc>
+         <lastmod>2025-06-14</lastmod>
+    </url>
+    <url>
+         <loc>https://nubificus.github.io/cloud-native-iot/developer/firmware_packaging/</loc>
+         <lastmod>2025-06-14</lastmod>
+    </url>
+    <url>
+         <loc>https://nubificus.github.io/cloud-native-iot/developer/initial_flash_packaging/</loc>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/getting-started/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/getting-started/installation/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/getting-started/prerequisites/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/getting-started/quickstart/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/tutorials/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/tutorials/akri-esp32/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/tutorials/dice-auth/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/tutorials/e2e/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/tutorials/esp32-initial/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/tutorials/onboarding/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/tutorials/ota-agent/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/tutorials/ota-service/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/tutorials/ota-update/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/tutorials/secure-boot-v2/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/tutorials/secure-boot/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/tutorials/setup/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
     <url>
          <loc>https://nubificus.github.io/cloud-native-iot/tutorials/vaccel/</loc>
-         <lastmod>2025-06-13</lastmod>
+         <lastmod>2025-06-14</lastmod>
     </url>
 </urlset>
