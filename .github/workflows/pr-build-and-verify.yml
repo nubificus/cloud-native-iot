@@ -1,4 +1,4 @@
-name: Build and Verify
+name: PR Build and Verify
 
 on:
   pull_request:
@@ -12,47 +12,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  verify-build:
-    name: Verify Build
+  check:
+    name: Run checks
     if: ${{ contains(github.event.pull_request.labels.*.name, 'ok-to-test') }}
-    uses: ./.github/workflows/verify-build.yml
+    uses: ./.github/workflows/ci.yml
     secrets: inherit
-
-  verify-build-strict:
-    name: Verify Build (Strict)
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'ok-to-test') }}
-    uses: ./.github/workflows/verify-build.yml
-    with:
-      strict: true
-    secrets: inherit
-
-  verify-links:
-    name: Verify Links
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'ok-to-test') }}
-    uses: ./.github/workflows/verify-links.yml
-    secrets: inherit
-
-  validate-files-and-commits:
-    name: Validate Files and Commits
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'ok-to-test') }}
-    uses: nubificus/vaccel/.github/workflows/validate-files-and-commits.yml@main
-    secrets: inherit
-
-  validate-code-and-markdown:
-    name: Validate Code and Markdown
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'ok-to-test') }}
-    uses: ./.github/workflows/validate-code-and-markdown.yml
-    secrets: inherit
-
-  # Dummy job for setting required checks
-  jobs-completed:
-    needs:
-      #      - verify-build
-      #- verify-build-strict
-      - verify-links
-        #- validate-files-and-commits
-      - validate-code-and-markdown
-    name: Jobs Completed
-    runs-on: base-2204-amd64
-    steps:
-      - run: exit 0
