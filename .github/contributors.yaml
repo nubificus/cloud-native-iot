@@ -1,0 +1,43 @@
+users:
+  github-actionsbot:
+    name: github-actions[bot]
+    email: 41898282+github-actions[bot]@users.noreply.github.com
+  dependabotbot:
+    name: dependabot[bot]
+    email: support@github.com
+  vaccel-botbot:
+    name: vaccel-bot[bot]
+    email: 175908213+vaccel-bot[bot]@users.noreply.github.com
+  ananos:
+    name: Anastassios Nanos
+    email: ananos@nubificus.co.uk
+  jlcsf:
+    name: Jay Limachya
+    email: jlima@nubificus.co.uk
+  cmainas:
+    name: Charalampos Mainas
+    email: cmainas@nubificus.co.uk
+  gntouts:
+    name: Georgios Ntoutsos
+    email: gntouts@nubificus.co.uk
+  JoshuaQSH:
+    name: Shenghao Qiu
+    email: shenghao@nubificus.co.uk
+  marrgko:
+    name: Maria Goutha
+    email: mgouth@nubificus.co.uk
+  ilagomatis:
+    name: Ilias Lagomatis
+    email: ilago@nubificus.co.uk
+  papazof:
+    name: Kostis Papazafeiropoulos
+    email: papazof@gmail.com
+  mgkeka-nbfc:
+    name: Maria Gkeka
+    email: mgkeka@nubificus.co.uk
+  panosmaurikos:
+    name: Panos Mavrikos
+    email: pmavrikos@nubificus.co.uk
+  apogiannousas:
+    name: Apostolos Giannousas
+    email: agian@nubificus.co.uk
