@@ -264,4 +264,5 @@ helm install my-flashjob-operator flashjob/operator \
 
 Now, we have a fully functional cluster with all the necessary components
 to run our Cloud Native IoT framework. You can continue this journey by
-preparing an ESP32-device to [be onboarded in the cluster](./../tutorials/esp32-initial.md)!
+preparing an ESP32-device to [be onboarded in the cluster](./../tutorials/esp32-initial.md)
+and [deploying a Discovery Handler to onboard the device](./../components/akri-dh.md#deploying-the-discovery-handler)!

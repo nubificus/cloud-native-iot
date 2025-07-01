@@ -101,8 +101,101 @@ ENTRYPOINT ["/discovery-handler"]
 
 ## Deploying the Discovery Handler
 
-After building the Discovery Handler, we need to push the Docker image into a registry.
-Then we can create an Akri Configuration that uses this Discovery Handler
-to discover compatible devices, as shown in the [instructions](./../getting-started/installation.md#installation)
+After building and pushing the Discovery Handler image to a registry, we are ready
+to create an Akri Configuration that uses this Discovery Handler to discover
+compatible devices.
 
-<!-- TODO: Change link to point to actual instructions! -->
+### Create Akri configuration
+
+The easiest way to achieve this is by using Helm template to create the
+a YAML file containing all the required resources based on a minimal YAML definition
+file.
+
+In this file, we can specify the name of our Akri Configuration,
+which Discovery Handler we will use, the discovery details that
+the DH will use the perform the device discovery, as well as
+which Broker Pod should be deployed for every discovered device:
+
+```yaml
+# onboarding-config-template.yaml
+
+controller:
+  enabled: false
+agent:
+  enabled: false
+cleanupHook:
+  enabled: false
+rbac:
+  enabled: false
+webhookConfiguration:
+  enabled: false
+useLatestContainers: false
+custom:
+  configuration:
+    enabled: true
+    name: http-range-onboard # The name of akric
+    capacity: 2
+    discoveryHandlerName: http-discovery-onboard # name of discovery handler, must be unique and matching discovery.name. will be used for socket creation
+    discoveryDetails: | # make sure this is valid YAML
+      ipStart: 192.168.11.20
+      ipEnd: 192.168.11.100
+      applicationType: initial
+      secure: true
+    brokerPod:
+      image:
+        repository: docker.io/gntouts/pause
+        tag: latest
+  discovery:
+    enabled: true
+    image:
+      repository: harbor.nbfc.io/nubificus/iot/akri-discovery-handler-go
+      tag: latest
+    name: http-discovery-onboard # name of discovery handler, must be unique and matching custom.configuration.discoveryHandlerName
+```
+
+> **Note:** The name of the Akri configuration (`.custom.configuration.name`) must
+> be unique.
+> Similarly, the Discovery Handler name defined in the configuration section
+> (`.custom.configuration.discoveryHandlerName`) and the name defined in the
+> discovery section (`.custom.discovery.name`) must both be
+> unique **and** identical.
+> It is not possible for Discovery Handlers from different Akri Configurations
+> to share the same name,
+> as the name is used to create the socket that the Discovery service listens on.
+
+Now, let's create the actual YAML file that will be applied to Kubernetes using Helm:
+
+```bash
+helm template akri akri-helm-charts/akri -f onboarding-config-template.yaml > onboarding-config.yaml
+```
+
+Finally, let's apply it to create the Akri Configuration:
+
+```bash
+kubectl apply -f ./onboarding-config.yaml
+```
+
+We should now be able to see the deployed Pods of our Discovery Handler:
+
+```console
+$ kubectl get pods | grep http-onboard
+http-discovery-onboard-daemonset-8r9nl                1/1     Running   0          1m
+http-discovery-onboard-daemonset-d5frl                1/1     Running   0          1m
+http-discovery-onboard-daemonset-htlbd                1/1     Running   0          1m
+```
+
+### Delete Akri configuration
+
+If we want to delete the Akri Configuration, we need to either use the
+generated YAML file:
+
+```bash
+kubectl delete -f ./onboarding-config.yaml
+```
+
+Or delete the Akri Configuration and DaemonSet manually:
+
+```bash
+kubectl delete akric http-range-onboard
+kubectl delete daemonset http-discovery-onboard-daemonset
+```
