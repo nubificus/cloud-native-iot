@@ -116,7 +116,7 @@ jobs:
       - name: Create pull request
         id: create-pr
         if: ${{ steps.parse-payload.outputs.ext-deploy == 'true' }}
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         env:
           SUBMODULE: ${{ steps.fetch-submodule.outputs.sm-name }}
           EXT_REF: ${{ steps.parse-payload.outputs.ext-ref }}
